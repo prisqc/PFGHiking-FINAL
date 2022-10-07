@@ -47,7 +47,7 @@ public class Crear_Cuenta extends AppCompatActivity {
         setContentView( R.layout.activity_crear_cuenta );
 
         mAuth = FirebaseAuth.getInstance();
-        rDatabase = FirebaseDatabase.getInstance("https://console.firebase.google.com/project/pfghiking/database/pfghiking-default-rtdb/data/~2F?hl=es").getReference();
+        rDatabase = FirebaseDatabase.getInstance("https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
 
         Textemail = ( EditText ) findViewById( R.id.email_CC );
         Textusuario = ( EditText ) findViewById( R.id.usuario_CC );
