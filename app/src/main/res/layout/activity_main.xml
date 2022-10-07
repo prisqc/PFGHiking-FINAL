@@ -36,7 +36,7 @@
         android:id="@+id/imageView2"
         android:layout_width="100dp"
         android:layout_height="120dp"
-        android:src="@drawable/Hklogo"
+        android:src="@drawable/hklogo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView"
         app:layout_constraintLeft_toLeftOf="parent"
