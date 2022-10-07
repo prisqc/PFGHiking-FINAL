@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "352917642417",
+    "project_id": "pfghiking",
+    "storage_bucket": "pfghiking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352917642417:android:b857660cc3cdd2370b1690",
+        "android_client_info": {
+          "package_name": "com.example.pfghiking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352917642417-pjr5c3ns9hugu2rv2quatr4fjaroc8dm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2nUBDQGLEUN93fgizNRkAWEt2gvnd13o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352917642417-pjr5c3ns9hugu2rv2quatr4fjaroc8dm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
