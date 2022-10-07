@@ -4,6 +4,79 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Iniciar_Sesion">
+    tools:context=".Iniciar_Sesion"
+    android:background="@color/lightgreen">
+
+    <EditText
+        android:id="@+id/iniciar_sesion_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="250dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:hint="ingresa el email"
+        android:textAlignment="center"
+        android:textColor="@color/lightbrown"
+        android:textSize="20dp"
+        android:textColorHint="@color/lightbrown"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/iniciar_sesion_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="190dp"
+        android:layout_marginBottom="200dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:hint="contraseña"
+        android:textAlignment="center"
+        android:textColor="@color/lightbrown"
+        android:textSize="20dp"
+        android:ems="15"
+        android:inputType="textPassword"
+        android:textColorHint="@color/lightbrown"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView_ForgotPass_IS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Olvidaste Contraseña?"
+        android:textSize="18dp"
+        android:textStyle="italic"
+        android:clickable="true"
+        android:focusable="true"
+        android:textColor="@color/lightbrown"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <Button
+        android:id="@+id/button_iniciar_sesion_IS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:layout_marginBottom="50dp"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:padding="10dp"
+        app:cornerRadius="20dp"
+        android:text="iniciar sesión"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
