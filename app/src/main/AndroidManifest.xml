@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PFGHiking">
         <activity
+            android:name=".Principal"
+            android:exported="false" />
+        <activity
             android:name=".Crear_Cuenta"
             android:exported="false" />
         <activity
