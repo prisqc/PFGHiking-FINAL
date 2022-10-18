@@ -18,7 +18,9 @@ public class ModelRuta {
         public ModelRuta() {
         }
 
-        public ModelRuta(String nombre_ruta, ModelUser user, String descripcion, String distancia, String desnivel, String tiempo, String pais, String ciudad, String provincia, String imagen) {
+        public ModelRuta(String nombre_ruta, ModelUser user, String descripcion, String distancia,
+                         String desnivel, String tiempo, String pais, String ciudad,
+                         String provincia, String imagen) {
             this.nombre_ruta = nombre_ruta;
             this.user = user;
             this.descripcion = descripcion;
@@ -31,17 +33,18 @@ public class ModelRuta {
             this.imagen = imagen;
         }
 
-    public ModelRuta(String id, String nombre_ruta, ModelUser user, String descripcion, String distancia, String desnivel, String tiempo, String pais, String ciudad, String provincia, String imagen) {
+    public ModelRuta(String id, String nombre_ruta, ModelUser user, String distancia,
+                     String desnivel, String tiempo, String imagen) {
         this.id = id;
         this.nombre_ruta = nombre_ruta;
         this.user = user;
-        this.descripcion = descripcion;
+      //  this.descripcion = descripcion;
         this.distancia = distancia;
         this.desnivel = desnivel;
         this.tiempo = tiempo;
-        this.pais = pais;
-        this.ciudad = ciudad;
-        this.provincia = provincia;
+      //  this.pais = pais;
+      //  this.ciudad = ciudad;
+      //  this.provincia = provincia;
         this.imagen = imagen;
     }
 
