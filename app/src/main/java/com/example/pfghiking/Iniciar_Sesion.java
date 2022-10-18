@@ -32,6 +32,7 @@ public class Iniciar_Sesion extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_iniciar_sesion );
 
+        //Para ocultar el actionBar
         getSupportActionBar().hide();
 
         Button myButton_is = this.<Button>findViewById(R.id.button_iniciar_sesion_IS);
