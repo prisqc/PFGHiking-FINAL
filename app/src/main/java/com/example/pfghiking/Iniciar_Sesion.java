@@ -35,7 +35,7 @@ public class Iniciar_Sesion extends AppCompatActivity {
         getSupportActionBar().hide();
 
         Button myButton_is = this.<Button>findViewById(R.id.button_iniciar_sesion_IS);
-        myButton_is.setBackgroundColor(0XFF493B37);
+        myButton_is.setBackgroundColor(0XFF6A5F4B);
 
 
         isAuth = FirebaseAuth.getInstance();

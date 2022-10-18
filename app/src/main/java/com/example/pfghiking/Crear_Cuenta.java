@@ -58,7 +58,7 @@ public class Crear_Cuenta extends AppCompatActivity {
 
         //---------------- CAMBIAR DE COLOR EL BOTÓN ---------------------
         Button myButton_cc = this.<Button>findViewById( R.id.button_crearCuenta_CC );
-        myButtonReg.setBackgroundColor( 0XFF493B37 );
+        myButtonReg.setBackgroundColor( 0XFF6A5F4B );
 
         myButtonReg.setOnClickListener( new View.OnClickListener() {
             @Override
