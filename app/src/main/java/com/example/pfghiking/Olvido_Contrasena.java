@@ -28,6 +28,8 @@ public class Olvido_Contrasena extends AppCompatActivity {
         getSupportActionBar().hide();
 
         rcButton = findViewById( R.id.button_forgot_pass_OC );
+        rcButton.setBackgroundColor( 0XFF6A5F4B );
+
         rcEmailEditText = findViewById( R.id.email_user_OC );
 
         rcButton.setOnClickListener( new View.OnClickListener() {
