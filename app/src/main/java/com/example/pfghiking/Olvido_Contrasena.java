@@ -10,5 +10,7 @@ public class Olvido_Contrasena extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_olvido_contrasena );
+
+        getSupportActionBar().hide();
     }
 }

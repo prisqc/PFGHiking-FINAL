@@ -46,6 +46,8 @@ public class Crear_Cuenta extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_crear_cuenta );
 
+        getSupportActionBar().hide();
+
         mAuth = FirebaseAuth.getInstance();
         rDatabase = FirebaseDatabase.getInstance("https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
 
