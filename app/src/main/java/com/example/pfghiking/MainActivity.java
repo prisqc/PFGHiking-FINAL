@@ -30,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
         // --------------- CAMBIAR DE COLOR LOS BOTONES ---------------------- //
 
         Button myButton_is  = this.<Button>findViewById(R.id.button_iniciar_sesion_AM);
-        myButton_is.setBackgroundColor(0XFF493B37);
+        myButton_is.setBackgroundColor(0XFF6A5F4B);
 
         Button myButton_cc  = this.<Button>findViewById( R.id.button_crear_cuenta_AM );
-        myButton_cc.setBackgroundColor(0XFF493B37);
+        myButton_cc.setBackgroundColor(0XFF6A5F4B);
 
 
         // ---------------  BOTONES DE INTENT ---------------------- //
