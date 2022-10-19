@@ -8,8 +8,20 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.List;
 
 public class Principal extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
+    private RecyclerView rvLista;
+    private RecyclerRutaAdapter adapter;
+    private List<ModelRuta> elements;
+    private FirebaseDatabase mData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +30,12 @@ public class Principal extends AppCompatActivity {
 
         //Para ocultar el actionBar
         //getSupportActionBar().hide();
+
+
+
+
+
+
 
     }
 
