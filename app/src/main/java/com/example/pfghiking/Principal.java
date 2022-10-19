@@ -12,7 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +48,24 @@ public class Principal extends AppCompatActivity {
         adapter = new RecyclerRutaAdapter(elements);
         rvLista.setAdapter(adapter);
 
+        // Mostrar rutas creadas
+        ValueEventListener elements = mData.getReference().child("Rutas").addValueEventListener( new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Principal.this.elements.removeAll(Principal.this.elements);
+                for (DataSnapshot snapshot :
+                        dataSnapshot.getChildren()) {
+                    ModelRuta ruta = snapshot.getValue(ModelRuta.class);
+                    Principal.this.elements.add(ruta);
+                }
+                adapter.notifyDataSetChanged();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
 
