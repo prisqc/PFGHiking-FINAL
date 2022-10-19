@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PFGHiking">
         <activity
+            android:name=".Perfil"
+            android:exported="false" />
+        <activity
             android:name=".Crear_Ruta"
             android:exported="false" />
         <activity
