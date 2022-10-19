@@ -8,11 +8,13 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Principal extends AppCompatActivity {
@@ -31,7 +33,17 @@ public class Principal extends AppCompatActivity {
         //Para ocultar el actionBar
         //getSupportActionBar().hide();
 
+        mAuth = FirebaseAuth.getInstance();
 
+        rvLista = findViewById(R.id.RV_Rutas_PP);
+        rvLista.setLayoutManager(new LinearLayoutManager(this));
+
+        elements = new ArrayList<>();
+
+        mData = FirebaseDatabase.getInstance("https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/");
+
+        adapter = new RecyclerRutaAdapter(elements);
+        rvLista.setAdapter(adapter);
 
 
 
