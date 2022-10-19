@@ -54,6 +54,10 @@ public class Crear_Ruta extends AppCompatActivity {
         myButton_pu.setBackgroundColor(0XFF6A5F4B);
 
 
+        mAuth = FirebaseAuth.getInstance();
+        mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
+
+
         myButton_pu.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
