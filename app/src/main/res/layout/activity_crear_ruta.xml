@@ -8,7 +8,7 @@
     android:background="@color/white">
 
     <EditText
-        android:id="@+id/TV_nombreRuta_NR"
+        android:id="@+id/ET_nombreRuta_CR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="nombre de ruta"
@@ -37,7 +37,7 @@
         />
 
     <TextView
-        android:id="@+id/TV_descRuta_NR"
+        android:id="@+id/TV_descRuta_CR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Descripción de ruta"
@@ -54,7 +54,7 @@
         />
 
     <EditText
-        android:id="@+id/ET_descRuta_NR"
+        android:id="@+id/ET_descRuta_CR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="italic"
@@ -71,7 +71,7 @@
         />
 
     <EditText
-        android:id="@+id/ET_distRuta_NR"
+        android:id="@+id/ET_distRuta_CR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="italic"
@@ -88,7 +88,7 @@
         />
 
     <EditText
-        android:id="@+id/ET_desnRuta_NR"
+        android:id="@+id/ET_desnRuta_CR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="italic"
@@ -105,7 +105,7 @@
         />
 
     <EditText
-        android:id="@+id/ET_timeRuta_NR"
+        android:id="@+id/ET_timeRuta_CR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="italic"
@@ -123,7 +123,7 @@
 
 
     <EditText
-        android:id="@+id/ET_paísRuta_NR"
+        android:id="@+id/ET_paisRuta_CR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="italic"
@@ -141,7 +141,7 @@
 
 
     <EditText
-        android:id="@+id/ET_cityRuta_NR"
+        android:id="@+id/ET_cityRuta_CR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="italic"
@@ -159,7 +159,7 @@
 
 
     <Button
-        android:id="@+id/button_publicar_NR"
+        android:id="@+id/button_publicar_CR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="580dp"

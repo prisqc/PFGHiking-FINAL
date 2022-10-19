@@ -10,7 +10,6 @@ public class ModelRuta {
         String tiempo;
         String pais;
         String ciudad;
-        String provincia;
         String imagen;
         ModelUser user;
 
@@ -19,8 +18,7 @@ public class ModelRuta {
         }
 
         public ModelRuta(String nombre_ruta, ModelUser user, String descripcion, String distancia,
-                         String desnivel, String tiempo, String pais, String ciudad,
-                         String provincia, String imagen) {
+                         String desnivel, String tiempo, String pais, String ciudad, String imagen) {
             this.nombre_ruta = nombre_ruta;
             this.user = user;
             this.descripcion = descripcion;
@@ -29,7 +27,6 @@ public class ModelRuta {
             this.tiempo = tiempo;
             this.pais = pais;
             this.ciudad = ciudad;
-            this.provincia = provincia;
             this.imagen = imagen;
         }
 
@@ -44,7 +41,6 @@ public class ModelRuta {
         this.tiempo = tiempo;
       //  this.pais = pais;
       //  this.ciudad = ciudad;
-      //  this.provincia = provincia;
         this.imagen = imagen;
     }
 
@@ -118,14 +114,6 @@ public class ModelRuta {
 
         public void setCiudad(String ciudad) {
             this.ciudad = ciudad;
-        }
-
-        public String getProvincia() {
-            return provincia;
-        }
-
-        public void setProvincia(String provincia) {
-            this.provincia = provincia;
         }
 
         public String getImagen() {
