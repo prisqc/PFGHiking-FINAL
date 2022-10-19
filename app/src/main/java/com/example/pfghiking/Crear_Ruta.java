@@ -5,11 +5,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Crear_Ruta extends AppCompatActivity {
 
@@ -62,16 +67,57 @@ public class Crear_Ruta extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-            //Cuando publicas la nueva ruta, te lleva a la pantalla principal... por verificar!!!
-                Intent pu_CR = new Intent(Crear_Ruta.this, Principal.class);
-                pu_CR.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-                startActivity( pu_CR );
+                title = editTextName.getText().toString();
+                description = editTextDescr.getText().toString();
+                distancia = editTextDist.getText().toString();
+                desnivel = editTextDesn.getText().toString();
+                time = editTexttime.getText().toString();
+                pais = editTextPais.getText().toString();
+                city = editTextCity.getText().toString();
+
+                mData.getReference().child( "Users" ).child( mAuth.getCurrentUser().getUid() ).addValueEventListener( new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            ModelUser usu = dataSnapshot.getValue( ModelUser.class);
+
+                            usuario = new ModelUser(usu.getId(), (dataSnapshot.child( "email" ).getValue()).toString() , usu.getNombre() );
+                            if (!title.isEmpty() && !description.isEmpty() && !distancia.isEmpty()
+                                    && desnivel.isEmpty() && time.isEmpty() && pais.isEmpty() && city.isEmpty()) {
+                                ModelRuta ruta = new ModelRuta(title , usuario , description, distancia, desnivel, time, pais, city);
+                                publicarRuta( ruta );
+
+                                Toast.makeText( Crear_Ruta.this, "Ruta Publicada Correctamente", Toast.LENGTH_SHORT ).show();
+                                startActivity( new Intent( getApplicationContext(), Principal.class ) );
+                                finish();
+                            } else {
+                                Toast.makeText( Crear_Ruta.this, "campos sin llenar", Toast.LENGTH_SHORT ).show();
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                } );
+
 
             }
-        } );
+
+        });
+    }
+
+            public void publicarRuta(ModelRuta ruta) {
+
+                String key = mData.getReference().child("Rutas").push().getKey();
+                mData.getReference().child( "Rutas" ).child(key).setValue( ruta );
+
+            }
+
 
 
     }
 
 
-}

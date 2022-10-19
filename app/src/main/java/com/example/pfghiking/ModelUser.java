@@ -18,6 +18,13 @@ public class ModelUser {
 
     }
 
+    public ModelUser(String id, String email, String nombre) {
+        this.email = email;
+        this.nombre = nombre;
+        this.id = id;
+
+    }
+
     public String getEmail() {
         return email;
     }

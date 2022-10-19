@@ -30,6 +30,20 @@ public class ModelRuta {
             this.imagen = imagen;
         }
 
+    public ModelRuta(String nombre_ruta, ModelUser user, String descripcion, String distancia,
+                     String desnivel, String tiempo, String pais, String ciudad) {
+        this.nombre_ruta = nombre_ruta;
+        this.user = user;
+        this.descripcion = descripcion;
+        this.distancia = distancia;
+        this.desnivel = desnivel;
+        this.tiempo = tiempo;
+        this.pais = pais;
+        this.ciudad = ciudad;
+    //    this.imagen = imagen;
+    }
+
+
     public ModelRuta(String id, String nombre_ruta, ModelUser user, String distancia,
                      String desnivel, String tiempo, String imagen) {
         this.id = id;
