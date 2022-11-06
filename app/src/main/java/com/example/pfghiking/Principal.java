@@ -49,14 +49,14 @@ public class Principal extends AppCompatActivity {
         rvLista.setAdapter(adapter);
 
         // Mostrar rutas creadas
-        ValueEventListener elements = mData.getReference().child("Rutas").addValueEventListener( new ValueEventListener() {
+        ValueEventListener elements = mData.getReference().child("rutas").addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Principal.this.elements.removeAll(Principal.this.elements);
                 for (DataSnapshot snapshot :
                         dataSnapshot.getChildren()) {
-                    ModelRuta ruta = snapshot.getValue(ModelRuta.class);
-                    Principal.this.elements.add(ruta);
+                    ModelRuta rut = snapshot.getValue(ModelRuta.class);
+                    Principal.this.elements.add(rut);
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -66,8 +66,6 @@ public class Principal extends AppCompatActivity {
 
             }
         });
-
-
 
     }
 
@@ -89,7 +87,7 @@ public class Principal extends AppCompatActivity {
                 Intent i = new Intent( Principal.this, Perfil.class );
                 i.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
                 startActivity( i );
-                finish();
+               // finish();
                 return true;
             case R.id.opcion2:
                 Intent i2 = new Intent( Principal.this, MainActivity.class );

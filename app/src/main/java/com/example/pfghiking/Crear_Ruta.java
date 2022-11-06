@@ -54,14 +54,12 @@ public class Crear_Ruta extends AppCompatActivity {
         editTextPais = findViewById( R.id.ET_paisRuta_CR );
         editTextCity = findViewById( R.id.ET_cityRuta_CR );
 
-
-        Button myButton_pu  = this.<Button>findViewById(R.id.button_publicar_CR);
-        myButton_pu.setBackgroundColor(0XFF6A5F4B);
-
-
         mAuth = FirebaseAuth.getInstance();
         mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
 
+
+        myButton_pu  = this.<Button>findViewById(R.id.button_publicar_CR);
+        myButton_pu.setBackgroundColor(0XFF6A5F4B);
 
         myButton_pu.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -78,22 +76,27 @@ public class Crear_Ruta extends AppCompatActivity {
                 mData.getReference().child( "Users" ).child( mAuth.getCurrentUser().getUid() ).addValueEventListener( new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        mData.getReference().child( "Usuario" ).child( mAuth.getCurrentUser().getUid() ).removeEventListener( this );
                         if(dataSnapshot.exists()){
                             ModelUser usu = dataSnapshot.getValue( ModelUser.class);
 
                             usuario = new ModelUser(usu.getId(), (dataSnapshot.child( "email" ).getValue()).toString() , usu.getNombre() );
                             if (!title.isEmpty() && !description.isEmpty() && !distancia.isEmpty()
-                                    && desnivel.isEmpty() && time.isEmpty() && pais.isEmpty() && city.isEmpty()) {
-                                ModelRuta ruta = new ModelRuta(title , usuario , description, distancia, desnivel, time, pais, city);
+                                    && !desnivel.isEmpty() && !time.isEmpty() && !pais.isEmpty() ) {
+                                ModelRuta ruta = new ModelRuta(title , usuario, description, distancia, desnivel, time, pais, city);
                                 publicarRuta( ruta );
 
                                 Toast.makeText( Crear_Ruta.this, "Ruta Publicada Correctamente", Toast.LENGTH_SHORT ).show();
                                 startActivity( new Intent( getApplicationContext(), Principal.class ) );
                                 finish();
+
                             } else {
                                 Toast.makeText( Crear_Ruta.this, "campos sin llenar", Toast.LENGTH_SHORT ).show();
                             }
 
+                        } else {
+                            Toast.makeText( Crear_Ruta.this, "Hay un error, no se puede publicar", Toast.LENGTH_SHORT ).show();
+                            startActivity( new Intent( getApplicationContext(), Crear_Ruta.class ) );
                         }
                     }
 
@@ -111,8 +114,8 @@ public class Crear_Ruta extends AppCompatActivity {
 
             public void publicarRuta(ModelRuta ruta) {
 
-                String key = mData.getReference().child("Rutas").push().getKey();
-                mData.getReference().child( "Rutas" ).child(key).setValue( ruta );
+                String key = mData.getReference().child("rutas").push().getKey();
+                mData.getReference().child( "rutas" ).child(key).setValue( ruta );
 
             }
 

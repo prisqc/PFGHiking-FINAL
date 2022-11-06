@@ -10,30 +10,29 @@ public class ModelRuta {
         String tiempo;
         String pais;
         String ciudad;
+        ModelUser users;
         String imagen;
-        ModelUser user;
+
 
 
         public ModelRuta() {
         }
 
-        public ModelRuta(String nombre_ruta, ModelUser user, String descripcion, String distancia,
-                         String desnivel, String tiempo, String pais, String ciudad, String imagen) {
-            this.nombre_ruta = nombre_ruta;
-            this.user = user;
-            this.descripcion = descripcion;
-            this.distancia = distancia;
-            this.desnivel = desnivel;
-            this.tiempo = tiempo;
-            this.pais = pais;
-            this.ciudad = ciudad;
-            this.imagen = imagen;
-        }
+    public ModelRuta(String nombre_ruta, ModelUser users, String distancia,
+                     String desnivel, String tiempo) {
+        this.nombre_ruta = nombre_ruta;
+        this.users = users;
+        this.distancia = distancia;
+        this.desnivel = desnivel;
+        this.tiempo = tiempo;
 
-    public ModelRuta(String nombre_ruta, ModelUser user, String descripcion, String distancia,
+    }
+
+
+    public ModelRuta(String nombre_ruta, ModelUser users, String descripcion, String distancia,
                      String desnivel, String tiempo, String pais, String ciudad) {
         this.nombre_ruta = nombre_ruta;
-        this.user = user;
+        this.users = users;
         this.descripcion = descripcion;
         this.distancia = distancia;
         this.desnivel = desnivel;
@@ -44,17 +43,17 @@ public class ModelRuta {
     }
 
 
-    public ModelRuta(String id, String nombre_ruta, ModelUser user, String distancia,
+    public ModelRuta(String id, String nombre_ruta, ModelUser users, String distancia,
                      String desnivel, String tiempo, String imagen) {
         this.id = id;
         this.nombre_ruta = nombre_ruta;
-        this.user = user;
-      //  this.descripcion = descripcion;
+        this.users = users;
+        this.descripcion = descripcion;
         this.distancia = distancia;
         this.desnivel = desnivel;
         this.tiempo = tiempo;
-      //  this.pais = pais;
-      //  this.ciudad = ciudad;
+        this.pais = pais;
+        this.ciudad = ciudad;
         this.imagen = imagen;
     }
 
@@ -71,15 +70,12 @@ public class ModelRuta {
         }
 
         public void setNombre_ruta(String nombre_ruta) {
-            this.nombre_ruta = nombre_ruta;
-        }
+            this.nombre_ruta = nombre_ruta;         }
 
-        public ModelUser getUsers() {
-        return user;
-    }
+        public ModelUser getUsers(){ return users; }
 
-        public void setUser(ModelUser user) {
-        this.user = user;
+        public void setUsers(ModelUser users) {
+        this.users = users;
     }
 
         public String getDescripcion() {

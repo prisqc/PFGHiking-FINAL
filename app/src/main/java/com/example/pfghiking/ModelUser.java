@@ -11,17 +11,17 @@ public class ModelUser {
     }
 
     public ModelUser(String id, String email, String nombre, String foto) {
+        this.id = id;
         this.email = email;
         this.nombre = nombre;
-        this.id = id;
         this.foto = foto;
 
     }
 
     public ModelUser(String id, String email, String nombre) {
+        this.id = id;
         this.email = email;
         this.nombre = nombre;
-        this.id = id;
 
     }
 
