@@ -80,7 +80,7 @@ public class Crear_Ruta extends AppCompatActivity {
                         if(dataSnapshot.exists()){
                             ModelUser usu = dataSnapshot.getValue( ModelUser.class);
 
-                            usuario = new ModelUser(usu.getId(), (dataSnapshot.child( "email" ).getValue()).toString() , usu.getNombre(), usu.getId() );
+                            usuario = new ModelUser(usu.getId(), (dataSnapshot.child( "email" ).getValue()).toString() , usu.getNombre() );
                             if (!title.isEmpty() && !description.isEmpty() && !distancia.isEmpty()
                                     && !desnivel.isEmpty() && !time.isEmpty() && !pais.isEmpty() ) {
                                 ModelRuta ruta = new ModelRuta(title , usuario, description, distancia, desnivel, time, pais, city);

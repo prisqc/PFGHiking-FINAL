@@ -35,7 +35,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
 
         ModelRuta rut = dataRutas.get( position );
         holder.nombre_ruta.setText( rut.getNombre_ruta() );
-        holder.tvUsuario.setText( rut.getUsers().getNombre() );
+        holder.tvUsuario.setText( rut.getUsers().getEmail() );
         holder.distancia.setText( rut.getDistancia() );
         holder.desnivel.setText( rut.getDesnivel() );
         holder.tiempo.setText( rut.getTiempo() );
