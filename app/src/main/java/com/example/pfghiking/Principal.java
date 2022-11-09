@@ -55,7 +55,7 @@ public class Principal extends AppCompatActivity implements SearchView.OnQueryTe
         elements = new ArrayList<>();
 
         mData = FirebaseDatabase.getInstance("https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/");
-        
+
         // Mostrar rutas creadas
         ValueEventListener elements = mData.getReference().child("rutas").addValueEventListener( new ValueEventListener() {
             @Override

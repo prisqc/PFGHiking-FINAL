@@ -1,5 +1,6 @@
 package com.example.pfghiking;
 
+import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +18,10 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
 
     private List<ModelRuta> dataRutas = new ArrayList<>();
     private List<ModelRuta> dataOriginal;
-    private final RecyclerViewClickListener listener; // para generar eventos en el recycler view
+    private final RecyclerViewClickListener listener; // para generar eventos en el RV
 
     public RecyclerRutaAdapter( List<ModelRuta> dataRutas, RecyclerViewClickListener listener){
-        this.listener = listener;
+        this.listener = listener; //para generar eventos en el RV
         this.dataRutas = dataRutas;
         dataOriginal = new ArrayList<>();
         dataOriginal.addAll( dataRutas );
@@ -44,6 +45,23 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
         holder.desnivel.setText( rut.getDesnivel() );
         holder.tiempo.setText( rut.getTiempo() );
       //  Glide.with(holder.imgRuta.getContext()).load(rut.getImagen()).into(holder.imgRuta);
+
+
+        //PARA ENVIAR INFORMACIÓN A UNA NUEVA PANTALLA EN EL RV
+        holder.itemView.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =  new Intent(holder.itemView.getContext(), Info_Ruta.class);
+                intent.putExtra( "itemDetails", rut );
+                holder.itemView.getContext().startActivity( intent );
+
+            }
+        } );
+
+
+
+
+
     }
 
 
@@ -82,7 +100,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
     }
 
 
-    public static class RecyclerHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class RecyclerHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView nombre_ruta;
         private TextView tvUsuario;
         private TextView distancia;
@@ -110,7 +128,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
         // para generar eventos en el RV
         @Override
         public void onClick(View v) {
-            listener.onItemClick( v, getAdapterPosition() );
+         listener.onItemClick( v, getAdapterPosition() );
         }
     }
 

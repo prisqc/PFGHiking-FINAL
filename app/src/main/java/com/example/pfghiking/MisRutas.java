@@ -24,7 +24,7 @@ public class MisRutas extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private RecyclerView rvLista;
     private RecyclerRutaAdapter adapter;
-    private List<ModelRuta> elements2;
+    private List<ModelRuta> elements2 = new ArrayList<>();
     private List<ModelRuta> dataOriginal;
     private FirebaseDatabase mData;
 
