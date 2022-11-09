@@ -87,5 +87,24 @@ public class Perfil extends AppCompatActivity {
             }
         } );
 
+
+
+
+        //Acción para cambiar de página de Perfil a Mis Rutas
+        misRutas.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(Perfil.this,MisRutas.class);
+                i.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                startActivity( i );
+                finish();
+
+            }
+        } );
+
+
+        
+
     }
 }
