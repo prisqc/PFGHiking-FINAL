@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +31,7 @@ public class Principal extends AppCompatActivity implements SearchView.OnQueryTe
     private SearchView txtBuscar2;
     private List<ModelRuta> elements;
     private FirebaseDatabase mData;
+    private RecyclerRutaAdapter.RecyclerViewClickListener listener; // para generar eventos en el RV
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +46,16 @@ public class Principal extends AppCompatActivity implements SearchView.OnQueryTe
         rvLista = findViewById(R.id.RV_Rutas_PP);
         txtBuscar2 = findViewById( R.id.searchView_PP );
 
+        setUserInfo(); //para generar eventos en el RV
+        setAdapter(); //para generar eventos en el RV
+
+
         rvLista.setLayoutManager(new LinearLayoutManager(this));
 
         elements = new ArrayList<>();
 
         mData = FirebaseDatabase.getInstance("https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/");
-
-        adapter = new RecyclerRutaAdapter(elements);
-        rvLista.setAdapter(adapter);
-
+        
         // Mostrar rutas creadas
         ValueEventListener elements = mData.getReference().child("rutas").addValueEventListener( new ValueEventListener() {
             @Override
@@ -79,10 +83,39 @@ public class Principal extends AppCompatActivity implements SearchView.OnQueryTe
 
 
 
+    //para generar eventos en el RV
+    private void setAdapter() {
+        setOnClickListener();
+        RecyclerRutaAdapter adapter = new RecyclerRutaAdapter( elements, listener);
+        RecyclerView.LayoutManager rl = new LinearLayoutManager( getApplicationContext() );
+        rvLista.setLayoutManager( rl );
+        rvLista.setItemAnimator( new DefaultItemAnimator() );
+        rvLista.setAdapter( adapter );
 
+    }
 
+    // para generar eventos en el RV, pasar datos a Info_Ruta
+    private void setOnClickListener() {
+        listener = new RecyclerRutaAdapter.RecyclerViewClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent i = new Intent(getApplicationContext(), Info_Ruta.class);
+                i.putExtra( "title" , elements.get( position ).getNombre_ruta() );
+                i.putExtra( "description" , elements.get( position ).getDescripcion() );
+                i.putExtra( "distance" , elements.get( position ).getDistancia() );
+                i.putExtra( "altitude" , elements.get( position ).getDesnivel() );
+                i.putExtra( "time" , elements.get( position ).getTiempo() );
+                i.putExtra( "country" , elements.get( position ).getPais() );
+                i.putExtra( "city" , elements.get( position ).getCiudad() );
+                startActivity( i );
+            }
+        };
+    }
 
-
+    // para generar eventos en el RV
+    private void setUserInfo(){
+        List<ModelRuta> elements = new ArrayList<ModelRuta>();
+    }
 
 
     //PARA CREAR EL MENU EN EL PANTALLA PRINCIPAL

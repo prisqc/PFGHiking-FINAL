@@ -45,7 +45,7 @@ public class Info_Ruta extends AppCompatActivity {
 
         title = findViewById( R.id.TV_nombreRuta_IR );
         description = findViewById( R.id.TV_descRuta_IR );
-        description = findViewById( R.id.TV_descRuta_IR );
+        distance = findViewById( R.id.TV_distRuta_IR );
         altitude = findViewById( R.id.TV_desnRuta_IR );
         time = findViewById( R.id.TV_timeRuta_IR );
         country = findViewById( R.id.TV_paisRuta_IR );
@@ -74,7 +74,7 @@ public class Info_Ruta extends AppCompatActivity {
                     distance.setText( distancia );
 
                     String desnivel = snapshot.child( "rutas" ).getValue().toString();
-                    title.setText( desnivel );
+                    altitude.setText( desnivel );
 
                     String tiempo = snapshot.child( "rutas" ).getValue().toString();
                     time.setText( tiempo );
