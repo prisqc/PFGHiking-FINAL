@@ -5,15 +5,16 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/lightgreen"
-    android:layout_marginTop="15dp">
+    android:background="@color/lightgreen2"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
 
     <TextView
         android:id="@+id/TV_name_Layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:textStyle="bold"
@@ -105,11 +106,13 @@
         android:layout_marginStart="260dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
+        android:layout_marginBottom="5dp"
         android:hint="UserName"
         android:textAlignment="textStart"
         android:textColor="@color/lightbrown"
         android:textSize="10sp"
         android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_Ruta_Layout" />
