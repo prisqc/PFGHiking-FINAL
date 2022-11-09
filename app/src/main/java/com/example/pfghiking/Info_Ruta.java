@@ -1,8 +1,8 @@
 package com.example.pfghiking;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Info_Ruta extends AppCompatActivity {
 
