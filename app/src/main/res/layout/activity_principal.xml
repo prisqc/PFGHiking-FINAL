@@ -1,25 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Principal"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:weightSum="4"
+    android:orientation="vertical">
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/RV_Rutas_PP"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="130dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="0.5">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <SearchView
+            android:id="@+id/searchView_PP"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:outlineSpotShadowColor="@color/lightbrown"
+            android:outlineAmbientShadowColor="@color/lightbrown"
+            android:background="@color/lightgreen"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="708dp"
+        android:layout_weight="3.5">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RV_Rutas_PP"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"/>
+    </LinearLayout>
+
+</LinearLayout>
