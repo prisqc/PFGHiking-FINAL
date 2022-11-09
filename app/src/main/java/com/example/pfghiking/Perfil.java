@@ -36,7 +36,6 @@ public class Perfil extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mDataBase = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
 

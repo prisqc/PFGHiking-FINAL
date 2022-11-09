@@ -15,10 +15,12 @@ import java.util.stream.Collectors;
 
 public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapter.RecyclerHolder> {
 
-    private List<ModelRuta> dataRutas;
+    private List<ModelRuta> dataRutas = new ArrayList<>();
     private List<ModelRuta> dataOriginal;
+    private final RecyclerViewClickListener listener; // para generar eventos en el recycler view
 
-    public RecyclerRutaAdapter( List<ModelRuta> dataRutas){
+    public RecyclerRutaAdapter( List<ModelRuta> dataRutas, RecyclerViewClickListener listener){
+        this.listener = listener;
         this.dataRutas = dataRutas;
         dataOriginal = new ArrayList<>();
         dataOriginal.addAll( dataRutas );
@@ -28,7 +30,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
     @Override
     public RecyclerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from( parent.getContext() ).inflate(R.layout.row_ruta_recycler, parent, false);
-        RecyclerHolder holder = new RecyclerHolder(view);
+        RecyclerHolder holder = new RecyclerHolder(view, listener);
         return holder;
     }
 
@@ -74,16 +76,13 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
 
 
 
-
-
-
     @Override
     public int getItemCount( ) {
         return dataRutas.size();
     }
 
 
-    public static class RecyclerHolder extends RecyclerView.ViewHolder {
+    public static class RecyclerHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView nombre_ruta;
         private TextView tvUsuario;
         private TextView distancia;
@@ -93,16 +92,35 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
 
 
 
-        public RecyclerHolder(final View view) {
-            super(view);
-            nombre_ruta = view.findViewById( R.id.TV_name_Layout );
-            tvUsuario = view.findViewById( R.id.TV_User_Layout );
-            distancia = view.findViewById( R.id.TV_distRuta_Layout );
-            desnivel = view.findViewById( R.id.TV_desnRuta_Layout );
-            tiempo = view.findViewById( R.id.TV_timeRuta_Layout );
-      //      imgRuta = view.findViewById( R.id.img_Ruta_Layout );
+        public RecyclerHolder(final View itemView, RecyclerViewClickListener listener) {
+            super(itemView);
+            nombre_ruta = itemView.findViewById( R.id.TV_name_Layout );
+            tvUsuario = itemView.findViewById( R.id.TV_User_Layout );
+            distancia = itemView.findViewById( R.id.TV_distRuta_Layout );
+            desnivel = itemView.findViewById( R.id.TV_desnRuta_Layout );
+            tiempo = itemView.findViewById( R.id.TV_timeRuta_Layout );
+      //      imgRuta = itemView.findViewById( R.id.img_Ruta_Layout );
+
+            // para generar eventos en el RV
+            itemView.setOnClickListener( this );
 
 
         }
+
+        // para generar eventos en el RV
+        @Override
+        public void onClick(View v) {
+            listener.onItemClick( v, getAdapterPosition() );
+        }
     }
+
+
+
+    //para generar eventos en el RV
+    public interface RecyclerViewClickListener{
+        void onItemClick(View view, int position);
+    }
+
+
+
 }

@@ -1,6 +1,8 @@
 package com.example.pfghiking;
 
-public class ModelRuta {
+import java.io.Serializable;
+
+public class ModelRuta  implements Serializable {
 
         String id;
         String nombre_ruta;
