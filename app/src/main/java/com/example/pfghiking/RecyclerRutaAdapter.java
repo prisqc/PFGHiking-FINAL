@@ -1,5 +1,6 @@
 package com.example.pfghiking;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapter.RecyclerHolder> {
 
@@ -41,6 +43,39 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
         holder.tiempo.setText( rut.getTiempo() );
       //  Glide.with(holder.imgRuta.getContext()).load(rut.getImagen()).into(holder.imgRuta);
     }
+
+
+
+    //para filtrar y mostrar ruta en SearchView
+    public void filtrado(final String txtBuscar2) {
+        if (txtBuscar2.length() == 0) {
+            dataRutas.clear();
+            dataRutas.addAll( dataOriginal );
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                dataRutas.clear();
+                List<ModelRuta> collection = dataRutas.stream()
+                        .filter( i -> i.getNombre_ruta().toLowerCase().contains( txtBuscar2.toLowerCase() ) )
+                        .collect( Collectors.toList() );
+                dataRutas.addAll( collection );
+            } else {
+                //dataRutas.clear();
+                for (ModelRuta ruta : dataOriginal) {
+                    if (ruta.getNombre_ruta().toLowerCase().contains( txtBuscar2.toLowerCase() )) {
+                    dataOriginal.add( ruta );
+                }
+            }
+        }
+    }
+    notifyDataSetChanged();
+
+    } //fin del filtrado
+
+
+
+
+
+
 
     @Override
     public int getItemCount( ) {

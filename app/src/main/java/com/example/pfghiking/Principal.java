@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,11 +21,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Principal extends AppCompatActivity {
+public class Principal extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private FirebaseAuth mAuth;
     private RecyclerView rvLista;
     private RecyclerRutaAdapter adapter;
+    private SearchView txtBuscar2;
     private List<ModelRuta> elements;
     private FirebaseDatabase mData;
 
@@ -39,6 +41,8 @@ public class Principal extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         rvLista = findViewById(R.id.RV_Rutas_PP);
+        txtBuscar2 = findViewById( R.id.searchView_PP );
+
         rvLista.setLayoutManager(new LinearLayoutManager(this));
 
         elements = new ArrayList<>();
@@ -67,7 +71,19 @@ public class Principal extends AppCompatActivity {
             }
         });
 
+
+        txtBuscar2.setOnQueryTextListener( this );
+
+
     }
+
+
+
+
+
+
+
+
 
     //PARA CREAR EL MENU EN EL PANTALLA PRINCIPAL
     @Override
@@ -99,8 +115,24 @@ public class Principal extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected( item );
         }
+    } // fin del menú
+
+
+
+    //metodo para SEARCH VIEW con querys para buscar una ruta por nombre con SearchView
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        adapter.filtrado( newText );
+        return false;
     }
 
 
 
-}
+
+} // fin de la clase principal
