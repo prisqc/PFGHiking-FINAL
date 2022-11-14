@@ -1,14 +1,16 @@
 package com.example.pfghiking;
 
-import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +18,11 @@ import java.util.stream.Collectors;
 
 public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapter.RecyclerHolder> {
 
-    private List<ModelRuta> dataRutas = new ArrayList<>();
+    private List<ModelRuta> dataRutas;
     private List<ModelRuta> dataOriginal;
-    private final RecyclerViewClickListener listener; // para generar eventos en el RV
 
-    public RecyclerRutaAdapter( List<ModelRuta> dataRutas, RecyclerViewClickListener listener){
-        this.listener = listener; //para generar eventos en el RV
+
+    public RecyclerRutaAdapter( List<ModelRuta> dataRutas){
         this.dataRutas = dataRutas;
         dataOriginal = new ArrayList<>();
         dataOriginal.addAll( dataRutas );
@@ -31,7 +32,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
     @Override
     public RecyclerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from( parent.getContext() ).inflate(R.layout.row_ruta_recycler, parent, false);
-        RecyclerHolder holder = new RecyclerHolder(view, listener);
+        RecyclerHolder holder = new RecyclerHolder(view);
         return holder;
     }
 
@@ -44,21 +45,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
         holder.distancia.setText( rut.getDistancia() );
         holder.desnivel.setText( rut.getDesnivel() );
         holder.tiempo.setText( rut.getTiempo() );
-      //  Glide.with(holder.imgRuta.getContext()).load(rut.getImagen()).into(holder.imgRuta);
-
-
-        //PARA ENVIAR INFORMACIÓN A UNA NUEVA PANTALLA EN EL RV
-        holder.itemView.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent =  new Intent(holder.itemView.getContext(), Info_Ruta.class);
-                intent.putExtra( "itemDetails", rut );
-                holder.itemView.getContext().startActivity( intent );
-
-            }
-        } );
-
-
+        Glide.with(holder.imgRuta.getContext()).load(rut.getImagen()).into(holder.imgRuta);
 
 
 
@@ -68,26 +55,28 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
 
     //para filtrar y mostrar ruta en SearchView
     public void filtrado(final String txtBuscar2) {
-        if (txtBuscar2.length() == 0) {
+        int longitud = txtBuscar2.length();
+        if (longitud == 0) {
             dataRutas.clear();
             dataRutas.addAll( dataOriginal );
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+
+                List<ModelRuta> collection = dataOriginal.stream()
+                        .filter( i -> i.getNombre_ruta().toLowerCase().contains(txtBuscar2.toLowerCase()))
+                        .collect( Collectors.toList());
                 dataRutas.clear();
-                List<ModelRuta> collection = dataRutas.stream()
-                        .filter( i -> i.getNombre_ruta().toLowerCase().contains( txtBuscar2.toLowerCase() ) )
-                        .collect( Collectors.toList() );
                 dataRutas.addAll( collection );
             } else {
-                //dataRutas.clear();
-                for (ModelRuta ruta : dataOriginal) {
-                    if (ruta.getNombre_ruta().toLowerCase().contains( txtBuscar2.toLowerCase() )) {
-                    dataOriginal.add( ruta );
-                }
+                dataRutas.clear();
+                for (ModelRuta r: dataOriginal) {
+                    if (r.getNombre_ruta().toLowerCase().contains( txtBuscar2.toLowerCase() )) {
+                    dataOriginal.add( r );
+                     }
+                 }
             }
         }
-    }
-    notifyDataSetChanged();
+        notifyDataSetChanged();
 
     } //fin del filtrado
 
@@ -100,45 +89,35 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
     }
 
 
-    public class RecyclerHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class RecyclerHolder extends RecyclerView.ViewHolder {
         private TextView nombre_ruta;
         private TextView tvUsuario;
         private TextView distancia;
         private TextView desnivel;
         private TextView tiempo;
- //       private ImageView imgRuta;
+        private ImageView imgRuta;
 
 
 
-        public RecyclerHolder(final View itemView, RecyclerViewClickListener listener) {
-            super(itemView);
-            nombre_ruta = itemView.findViewById( R.id.TV_name_Layout );
-            tvUsuario = itemView.findViewById( R.id.TV_User_Layout );
-            distancia = itemView.findViewById( R.id.TV_distRuta_Layout );
-            desnivel = itemView.findViewById( R.id.TV_desnRuta_Layout );
-            tiempo = itemView.findViewById( R.id.TV_timeRuta_Layout );
-      //      imgRuta = itemView.findViewById( R.id.img_Ruta_Layout );
+        public RecyclerHolder(final View item) {
+            super(item);
+            nombre_ruta = item.findViewById( R.id.TV_name_Layout );
+            tvUsuario = item.findViewById( R.id.TV_User_Layout );
+            distancia = item.findViewById( R.id.TV_distRuta_Layout );
+            desnivel = item.findViewById( R.id.TV_desnRuta_Layout );
+            tiempo = item.findViewById( R.id.TV_timeRuta_Layout );
+            imgRuta = itemView.findViewById( R.id.img_Ruta_Layout );
 
-            // para generar eventos en el RV
-            itemView.setOnClickListener( this );
 
 
         }
 
-        // para generar eventos en el RV
-        @Override
-        public void onClick(View v) {
-         listener.onItemClick( v, getAdapterPosition() );
-        }
+
+
+
+
     }
 
 
 
-    //para generar eventos en el RV
-    public interface RecyclerViewClickListener{
-        void onItemClick(View view, int position);
-    }
-
-
-
-}
+} //FIN DE LA CLASE RecyclerRutaAdapter

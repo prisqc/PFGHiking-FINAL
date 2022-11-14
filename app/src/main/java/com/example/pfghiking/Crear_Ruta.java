@@ -26,6 +26,7 @@ public class Crear_Ruta extends AppCompatActivity {
     private EditText editTextPais;
     private EditText editTextCity;
     private Button myButton_pu;
+    private Button myButton_add;
     private String title = "";
     private String description = "";
     private String distancia = "";
@@ -56,6 +57,7 @@ public class Crear_Ruta extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
+
 
 
         myButton_pu  = this.<Button>findViewById(R.id.button_publicar_CR);
@@ -110,6 +112,15 @@ public class Crear_Ruta extends AppCompatActivity {
             }
 
         });
+
+
+
+        myButton_add  = this.<Button>findViewById(R.id.button_addPic_CR);
+        myButton_add.setBackgroundColor(0XFF6A5F4B);
+
+
+
+
     }
 
             public void publicarRuta(ModelRuta ruta) {
@@ -120,7 +131,6 @@ public class Crear_Ruta extends AppCompatActivity {
             }
 
 
-
-    }
+    } //FIN DE LA CLASE CREAR RUTA
 
 

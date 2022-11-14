@@ -41,7 +41,7 @@ public class ModelRuta  implements Serializable {
         this.tiempo = tiempo;
         this.pais = pais;
         this.ciudad = ciudad;
-    //    this.imagen = imagen;
+        this.imagen = imagen;
     }
 
 
@@ -136,4 +136,5 @@ public class ModelRuta  implements Serializable {
             this.imagen = imagen;
         }
 
-    }
+
+}
