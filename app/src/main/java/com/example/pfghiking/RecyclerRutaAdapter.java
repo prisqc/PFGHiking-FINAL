@@ -1,6 +1,5 @@
 package com.example.pfghiking;
 
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapter.RecyclerHolder> {
 
@@ -53,36 +51,6 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
 
 
 
-    //para filtrar y mostrar ruta en SearchView
-    public void filtrado(final String txtBuscar2) {
-        int longitud = txtBuscar2.length();
-        if (longitud == 0) {
-            dataRutas.clear();
-            dataRutas.addAll( dataOriginal );
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-
-                List<ModelRuta> collection = dataOriginal.stream()
-                        .filter( i -> i.getNombre_ruta().toLowerCase().contains(txtBuscar2.toLowerCase()))
-                        .collect( Collectors.toList());
-                dataRutas.clear();
-                dataRutas.addAll( collection );
-            } else {
-                dataRutas.clear();
-                for (ModelRuta r: dataOriginal) {
-                    if (r.getNombre_ruta().toLowerCase().contains( txtBuscar2.toLowerCase() )) {
-                    dataOriginal.add( r );
-                     }
-                 }
-            }
-        }
-        notifyDataSetChanged();
-
-    } //fin del filtrado
-
-
-
-
     @Override
     public int getItemCount( ) {
         return dataRutas.size();
@@ -116,7 +84,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
 
 
 
-    }
+    } //Fin de clase Recycler holder
 
 
 

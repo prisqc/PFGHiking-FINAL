@@ -5,10 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
+import android.widget.SearchView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Principal extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class Principal extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private RecyclerView rvLista;
@@ -41,28 +40,28 @@ public class Principal extends AppCompatActivity implements SearchView.OnQueryTe
 
         mAuth = FirebaseAuth.getInstance();
 
-        rvLista = findViewById(R.id.RV_Rutas_PP);
+        rvLista = findViewById( R.id.RV_Rutas_PP );
         txtBuscar2 = findViewById( R.id.searchView_PP );
 
 
-        rvLista.setLayoutManager(new LinearLayoutManager(this));
+        rvLista.setLayoutManager( new LinearLayoutManager( this ) );
 
         elements = new ArrayList<ModelRuta>();
 
-        adapter = new RecyclerRutaAdapter(elements);
-        rvLista.setAdapter(adapter);
+        adapter = new RecyclerRutaAdapter( elements );
+        rvLista.setAdapter( adapter );
 
-        mData = FirebaseDatabase.getInstance("https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/");
+        mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
 
         // Mostrar rutas creadas
-        ValueEventListener elements = mData.getReference().child("rutas").addValueEventListener( new ValueEventListener() {
+        ValueEventListener elements = mData.getReference().child( "rutas" ).addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Principal.this.elements.removeAll(Principal.this.elements);
+                Principal.this.elements.removeAll( Principal.this.elements );
                 for (DataSnapshot snapshot :
                         dataSnapshot.getChildren()) {
-                    ModelRuta rut = snapshot.getValue(ModelRuta.class);
-                    Principal.this.elements.add(rut);
+                    ModelRuta rut = snapshot.getValue( ModelRuta.class );
+                    Principal.this.elements.add( rut );
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -71,10 +70,8 @@ public class Principal extends AppCompatActivity implements SearchView.OnQueryTe
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        });
+        } );
 
-
-        txtBuscar2.setOnQueryTextListener( this );
 
 
     }
@@ -82,6 +79,7 @@ public class Principal extends AppCompatActivity implements SearchView.OnQueryTe
 
 
 
+    //**********************************************************************************************
     //PARA CREAR EL MENU EN EL PANTALLA PRINCIPAL
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,16 +89,18 @@ public class Principal extends AppCompatActivity implements SearchView.OnQueryTe
     }
 
 
+
+    //**********************************************************************************************
     //PARA CREAR OPCIONES DEL MENU EN LA PANTALLA PRINCIPAL
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.opcion1:
                 Intent i = new Intent( Principal.this, Perfil.class );
                 i.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
                 startActivity( i );
-               // finish();
+                // finish();
                 return true;
             case R.id.opcion2:
                 Intent i2 = new Intent( Principal.this, MainActivity.class );
@@ -115,18 +115,12 @@ public class Principal extends AppCompatActivity implements SearchView.OnQueryTe
     } // fin del menú
 
 
+
+    //**********************************************************************************************
     //metodo para SEARCH VIEW con querys para buscar una ruta por nombre con SearchView
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
 
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        adapter.filtrado( newText );
-        return false;
-    }
+
 
 
 } // fin de la clase principal
