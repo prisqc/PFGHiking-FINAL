@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,12 +21,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Principal extends AppCompatActivity {
+public class Principal extends AppCompatActivity  implements SearchView.OnQueryTextListener {
 
     private FirebaseAuth mAuth;
     private RecyclerView rvLista;
     private RecyclerRutaAdapter adapter;
-    private SearchView txtBuscar2;
+    private SearchView buscarSV;
     private List<ModelRuta> elements;
     private FirebaseDatabase mData;
 
@@ -41,30 +42,33 @@ public class Principal extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         rvLista = findViewById( R.id.RV_Rutas_PP );
-        txtBuscar2 = findViewById( R.id.searchView_PP );
+        buscarSV = findViewById( R.id.searchView_PP );
 
 
         rvLista.setLayoutManager( new LinearLayoutManager( this ) );
 
         elements = new ArrayList<ModelRuta>();
 
+        mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
+
+
         adapter = new RecyclerRutaAdapter( elements );
         rvLista.setAdapter( adapter );
 
-        mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
 
         // Mostrar rutas creadas
-        ValueEventListener elements = mData.getReference().child( "rutas" ).addValueEventListener( new ValueEventListener() {
+        mData.getReference().child( "rutas" ).addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Principal.this.elements.removeAll( Principal.this.elements );
+                elements.removeAll( elements );
                 for (DataSnapshot snapshot :
                         dataSnapshot.getChildren()) {
                     ModelRuta rut = snapshot.getValue( ModelRuta.class );
-                    Principal.this.elements.add( rut );
+                    elements.add( rut );
                 }
-                adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged( );
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -72,7 +76,7 @@ public class Principal extends AppCompatActivity {
             }
         } );
 
-
+        buscarSV.setOnQueryTextListener( this ); //para buscar en SV
 
     }
 
@@ -113,6 +117,25 @@ public class Principal extends AppCompatActivity {
                 return super.onOptionsItemSelected( item );
         }
     } // fin del menú
+
+
+
+
+
+    //**********************************************************************************************
+    //metodo para Buscar en SV
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        adapter.filtrado( newText );
+        return false;
+    }
+
+
 
 
 

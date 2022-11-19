@@ -21,9 +21,11 @@ public class Perfil extends AppCompatActivity {
     private FirebaseDatabase mDataBase;
     private ModelUser user;
     private TextView tvName;
-    private Button editarPerfil;
     private Button crearRuta;
     private Button misRutas;
+
+    //Agregar foto de perfil
+    private Button btnAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +44,16 @@ public class Perfil extends AppCompatActivity {
 
         tvName = findViewById( R.id.TV_name_Profile);
 
-        editarPerfil = findViewById( R.id.button_editar_PE );
-        editarPerfil.setBackgroundColor(0XFF6A5F4B);
-
         crearRuta = findViewById( R.id.button_CrearRuta_PE );
         crearRuta.setBackgroundColor(0XFF6A5F4B);
 
         misRutas = findViewById( R.id.button_MisRutas_PE );
         misRutas.setBackgroundColor(0XFF6A5F4B);
+
+
+        //Agregar foto de perfil - instanciar onjeto
+        btnAdd = findViewById( R.id.btn_AddFoto);
+        btnAdd.setBackgroundColor(0XFF6A5F4B);
 
 
 
