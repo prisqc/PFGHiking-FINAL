@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -36,10 +38,10 @@ public class Perfil extends AppCompatActivity {
 
     //Agregar foto de perfil
     private Button btnAdd;
-    private ImageView foto;
+    private ImageView fotoP;
+    private String urlFoto;
     private StorageReference mStorage;
     private ProgressDialog progressDialog;
-    private String urlFoto;
     private static final int GALLERY_INTENT = 1;
 
 
@@ -85,29 +87,30 @@ public class Perfil extends AppCompatActivity {
         } );
 
 
-        foto = findViewById( R.id.img_PE );
+        fotoP = findViewById( R.id.img_PE );
         progressDialog = new ProgressDialog( this );
         //FIN Agregar foto de Perfil
 
 
-        // Pasa información del usuario del registro
+        // Pasa información del usuario de la página de registro
         String id = mAuth.getCurrentUser().getUid();
         mDataBase.getReference().child( "Users" ).child( mAuth.getCurrentUser().getUid() ).addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     String name = snapshot.child( "usuario" ).getValue().toString();
-                    String photo = snapshot.child( "foto" ).getValue().toString() ;
                     tvName.setText( name );
-
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         } );
+
+
+
+
 
 
         //Acción para cambiar de página de Perfil a Crear Ruta
@@ -140,6 +143,33 @@ public class Perfil extends AppCompatActivity {
 
     } //FIN DEL METODO ONCREATE
 
+    private void getFotoPp( String urlFoto) {
+
+        mDataBase.getReference().child( "Users" ).child( mAuth.getCurrentUser().getUid() ).get().addOnSuccessListener( new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+
+                String url = dataSnapshot.getKey().toString();
+
+                try {
+                    if (!url.equals( "" ) ){
+                        Toast toast = Toast.makeText( getApplicationContext(), "Cargando Foto", Toast.LENGTH_SHORT);
+                        toast.setGravity( Gravity.TOP, 0, 1 );
+                        toast.show();
+                        Glide.with( Perfil.this ).load( urlFoto )
+                                .into( fotoP );
+
+                    }
+                }catch (Exception e){
+                    Log.v( "Error", "e: "+ e );
+                }
+            }
+        } );
+    }
+
+
+
+
 
     //AGREGAR FOTO DE PERFIL - METODO ONACTIVITYRESULT
     @Override
@@ -163,15 +193,19 @@ public class Perfil extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     progressDialog.dismiss(); //finaliza la barra de carga
 
-                    urlFoto = taskSnapshot.getStorage().getDownloadUrl().toString();
-
                     //OBTIENE EL URI DE LA FOTO
                     filePath.getDownloadUrl().addOnSuccessListener( new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            Glide.with( Perfil.this )
-                                    .load( uri ).into( foto );
+
+                            Glide.with( Perfil.this)
+                                    .load(uri).into((ImageView) findViewById( R.id.img_PE ));
                             Toast.makeText( Perfil.this, "Se subió correctamente la foto", Toast.LENGTH_SHORT ).show();
+
+                            //recupera la Url y asignala en el campo determinado "imagen"
+                            urlFoto = uri.toString();
+                            mDataBase.getReference().child( "Users" ).child( mAuth.getCurrentUser().getUid() ).child( "foto" ).setValue( urlFoto );
+
                         }
                     } );
 

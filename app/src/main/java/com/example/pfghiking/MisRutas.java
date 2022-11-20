@@ -45,7 +45,7 @@ public class MisRutas extends AppCompatActivity {
 
         mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
 
-        adapter = new RecyclerRutaAdapter( elements2);
+        adapter = new RecyclerRutaAdapter( elements2, getApplicationContext());
         rvLista.setAdapter( adapter );
 
         ValueEventListener elements = mData.getReference().child( "rutas" ).addValueEventListener( new ValueEventListener() {

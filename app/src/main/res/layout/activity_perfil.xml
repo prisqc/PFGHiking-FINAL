@@ -7,6 +7,19 @@
     tools:context=".Perfil"
     android:background="@color/white">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo5"
+        android:alpha="0.4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageView
         android:id="@+id/img_PE"
@@ -44,9 +57,9 @@
         android:layout_marginTop="180dp"
         android:padding="10dp"
         app:cornerRadius="20dp"
-        android:textColor="@color/brown"
-        android:text="+Foto"
-        android:textSize="10dp"
+        android:textColor="@color/white"
+        android:text="   + Foto   "
+        android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -55,10 +68,10 @@
         android:id="@+id/button_CrearRuta_PE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
+        android:layout_marginTop="370dp"
         android:padding="10dp"
         android:text="Crear ruta"
-        android:textColor="@color/brown"
+        android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold"
         app:cornerRadius="20dp"
@@ -73,7 +86,7 @@
         android:layout_marginTop="50dp"
         android:padding="10dp"
         android:text="Mis rutas"
-        android:textColor="@color/brown"
+        android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold"
         app:cornerRadius="20dp"

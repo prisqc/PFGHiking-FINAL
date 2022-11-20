@@ -52,7 +52,7 @@ public class Principal extends AppCompatActivity  implements SearchView.OnQueryT
         mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
 
 
-        adapter = new RecyclerRutaAdapter( elements );
+        adapter = new RecyclerRutaAdapter( elements , getApplicationContext());
         rvLista.setAdapter( adapter );
 
 
