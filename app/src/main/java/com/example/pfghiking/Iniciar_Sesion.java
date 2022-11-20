@@ -1,6 +1,7 @@
 package com.example.pfghiking;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,10 @@ public class Iniciar_Sesion extends AppCompatActivity {
 
     private FirebaseAuth isAuth;
 
+    private ModelUser user; //SHAREPREFERENCES - MANTENER SESION INICIADA
+    private SharedPreferences preferences; //SHAREPREFERENCES - MANTENER SESION INICIADA
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -46,6 +51,9 @@ public class Iniciar_Sesion extends AppCompatActivity {
         myButton_is = (Button) findViewById( R.id.button_iniciar_sesion_IS );
         olvidoContraseña = ( TextView ) findViewById( R.id.textView_ForgotPass_IS );
 
+
+        user = new ModelUser(); //SHAREPREFERENCES - MANTENER SESION INICIADA
+        preferences = getSharedPreferences( "Preferences", MODE_PRIVATE ); //SHAREPREFERENCES - MANTENER SESION INICIADA
 
         myButton_is.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -84,6 +92,15 @@ public class Iniciar_Sesion extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()){
+
+                    //SHAREPREFERENCES - VALIDAR USUARIO Y MANTENER SESION INICIADA
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putInt( "usuario_id", Integer.parseInt( FirebaseAuth.getInstance().getCurrentUser().getUid().toString() ) );
+                    editor.putString( "usuario", user.getNombre() );
+                    editor.commit(); //SHAREPREFERENCES - VALIDAR USUARIO Y MANTENER SESION INICIADA
+
+
+
                     Intent is_IS = new Intent( Iniciar_Sesion.this, Principal.class );
                     is_IS.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
                     startActivity( is_IS );
