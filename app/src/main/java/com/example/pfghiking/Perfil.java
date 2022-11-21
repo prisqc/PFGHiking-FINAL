@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -100,6 +99,7 @@ public class Perfil extends AppCompatActivity {
                 if (snapshot.exists()) {
                     String name = snapshot.child( "usuario" ).getValue().toString();
                     tvName.setText( name );
+                    getFotoPp( snapshot.child( "foto" ).getValue().toString());
                 }
             }
             @Override
@@ -154,7 +154,7 @@ public class Perfil extends AppCompatActivity {
                 try {
                     if (!url.equals( "" ) ){
                         Toast toast = Toast.makeText( getApplicationContext(), "Cargando Foto", Toast.LENGTH_SHORT);
-                        toast.setGravity( Gravity.TOP, 0, 1 );
+                        //toast.setGravity( Gravity.TOP, 0, 1 );
                         toast.show();
                         Glide.with( Perfil.this ).load( urlFoto )
                                 .into( fotoP );

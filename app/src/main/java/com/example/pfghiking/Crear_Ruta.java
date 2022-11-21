@@ -195,10 +195,10 @@ public class Crear_Ruta extends AppCompatActivity {
                             Toast.makeText( Crear_Ruta.this, "Se subió correctamente la foto", Toast.LENGTH_SHORT ).show();
 
                             //recupera la Url y asignala en el campo determinado "imagen"
-                           // urlImagen = uri.toString();
+                            urlImagen = uri.toString();
                            // HashMap<String, Object> map = new HashMap<>();
                            // map.put( "imagen",imagen );
-                            mData.getReference().child( "rutas" ).child( Objects.requireNonNull( mData.getReference().getKey() ) ).child( "imagen" ).setValue( uri );
+                            mData.getReference().child( "rutas" ).child( Objects.requireNonNull( mData.getReference().getKey() ) ).child( "imagen" ).setValue( urlImagen );
 
 
 
