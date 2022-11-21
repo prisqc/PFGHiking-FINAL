@@ -57,7 +57,24 @@ public class ModelRuta  implements Serializable {
         this.pais = pais;
         this.ciudad = ciudad;
         this.imagen = imagen;
+
     }
+
+    public ModelRuta(String nombre_ruta, ModelUser users, String descripcion, String distancia,
+                     String desnivel, String pais, String ciudad, String tiempo, String imagen) {
+
+        this.nombre_ruta = nombre_ruta;
+        this.users = users;
+        this.descripcion = descripcion;
+        this.distancia = distancia;
+        this.desnivel = desnivel;
+        this.tiempo = tiempo;
+        this.pais = pais;
+        this.ciudad = ciudad;
+        this.imagen = imagen;
+
+    }
+
 
         public String getId() {
         return id;

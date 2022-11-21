@@ -51,8 +51,8 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
         holder.tiempo.setText( rut.getTiempo() );
         String imagen = rut.getImagen();
         try{
-            ModelRuta sample = dataRutas.get( holder.getAdapterPosition() );
-            if(sample != null){
+            //ModelRuta sample = dataRutas.get( holder.getAdapterPosition() );
+            if(imagen != null){
                 Glide.with(mContext)
                         .load( imagen ).error(R.id.img_CR).into( holder.imgRuta );
             } else{

@@ -25,8 +25,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.util.Objects;
-
 public class Crear_Ruta extends AppCompatActivity {
 
     private EditText editTextName;
@@ -51,7 +49,7 @@ public class Crear_Ruta extends AppCompatActivity {
 
 
     //AGREGAR FOTO RUTA
-    private String urlImagen;
+    private String urlImagen ="";
     private ImageView picRuta ;
     private Button myButton_add;
     private StorageReference mStorage;
@@ -108,7 +106,7 @@ public class Crear_Ruta extends AppCompatActivity {
                             usuario = new ModelUser(usu.getId(), (dataSnapshot.child( "email" ).getValue()).toString() , usu.getNombre() );
                             if (!title.isEmpty() && !description.isEmpty() && !distancia.isEmpty()
                                     && !desnivel.isEmpty() && !time.isEmpty() && !pais.isEmpty() ) {
-                                ModelRuta ruta = new ModelRuta(title , usuario, description, distancia, desnivel, time, pais, city);
+                                ModelRuta ruta = new ModelRuta(title , usuario, description, distancia, desnivel, time, pais, city, urlImagen);
                                 publicarRuta( ruta );
 
                                 Toast.makeText( Crear_Ruta.this, "Ruta Publicada Correctamente", Toast.LENGTH_SHORT ).show();
@@ -198,7 +196,7 @@ public class Crear_Ruta extends AppCompatActivity {
                             urlImagen = uri.toString();
                            // HashMap<String, Object> map = new HashMap<>();
                            // map.put( "imagen",imagen );
-                            mData.getReference().child( "rutas" ).child( Objects.requireNonNull( mData.getReference().getKey() ) ).child( "imagen" ).setValue( urlImagen );
+                         //   mData.getReference().child( "rutas" ).child( Objects.requireNonNull( mData.getReference().getKey() ) ).child( "imagen" ).setValue( urlImagen );
 
 
 
