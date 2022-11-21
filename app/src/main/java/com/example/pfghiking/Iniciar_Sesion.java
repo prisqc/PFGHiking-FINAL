@@ -84,7 +84,7 @@ public class Iniciar_Sesion extends AppCompatActivity {
             }
         } );
 
-    }
+    } // FIN DEL METODO ONCREATE
 
     private void loginUser(){
         isAuth.signInWithEmailAndPassword( email, contraseña ).addOnCompleteListener( new OnCompleteListener<AuthResult>() {
@@ -95,11 +95,9 @@ public class Iniciar_Sesion extends AppCompatActivity {
 
                     //SHAREPREFERENCES - VALIDAR USUARIO Y MANTENER SESION INICIADA
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putInt( "usuario_id", Integer.parseInt( FirebaseAuth.getInstance().getCurrentUser().getUid().toString() ) );
+                    editor.putString( "usuario_id", user.getId() );
                     editor.putString( "usuario", user.getNombre() );
                     editor.commit(); //SHAREPREFERENCES - VALIDAR USUARIO Y MANTENER SESION INICIADA
-
-
 
                     Intent is_IS = new Intent( Iniciar_Sesion.this, Principal.class );
                     is_IS.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
@@ -116,4 +114,23 @@ public class Iniciar_Sesion extends AppCompatActivity {
 
 
 
+    //SHAREPREFERENCES - MANTENER SESION INICIADA
+    private  void validarSesion(){
+        String usuario_id = preferences.getString( "usuario_id", null );
+        String usuario = preferences.getString( "usuario", null );
+
+        if(usuario_id !=null  && usuario != null){
+            irPantallaPrincipal();
+        }
+
+
+    }
+
+
+    private void irPantallaPrincipal(){
+
+        Intent is_IS = new Intent( Iniciar_Sesion.this, Principal.class );
+        is_IS.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+        startActivity( is_IS );
+    }
 }

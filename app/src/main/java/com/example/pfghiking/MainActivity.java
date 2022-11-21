@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent is_MA = new Intent(MainActivity.this, Iniciar_Sesion.class);
                 is_MA.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
                 startActivity( is_MA );
+                finish();
 
             }
         } );

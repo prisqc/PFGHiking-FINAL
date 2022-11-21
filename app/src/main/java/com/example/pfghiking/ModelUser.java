@@ -7,7 +7,9 @@ public class ModelUser {
     String foto;
 
 
-    public ModelUser() {
+    public ModelUser(){}
+
+    public ModelUser(int id, String email, String nombre) {
     }
 
     public ModelUser(String id, String email, String nombre, String foto) {
@@ -40,7 +42,7 @@ public class ModelUser {
     }
 
     public String getId() {
-        return id;
+        return  id;
     }
 
     public void setId(String id) {
