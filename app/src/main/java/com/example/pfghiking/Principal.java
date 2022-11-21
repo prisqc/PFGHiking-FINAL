@@ -158,6 +158,7 @@ public class Principal extends AppCompatActivity  implements SearchView.OnQueryT
     //metodo para Buscar en SV
     @Override
     public boolean onQueryTextSubmit(String query) {
+
         return false;
     }
 

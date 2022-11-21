@@ -29,6 +29,7 @@ public class Crear_Cuenta extends AppCompatActivity {
     private String email = "";
     private String usuario = "";
     private String contraseña = "";
+    private String foto = "";
 
     private FirebaseAuth mAuth;
     DatabaseReference rDatabase;
@@ -54,6 +55,7 @@ public class Crear_Cuenta extends AppCompatActivity {
         Textemail = ( EditText ) findViewById( R.id.email_CC );
         Textusuario = ( EditText ) findViewById( R.id.usuario_CC );
         Textcontraseña = ( EditText ) findViewById( R.id.contraseña_CC );
+
         myButtonReg = ( Button ) findViewById( R.id.button_crearCuenta_CC );
 
         //---------------- CAMBIAR DE COLOR EL BOTÓN ---------------------
@@ -68,7 +70,7 @@ public class Crear_Cuenta extends AppCompatActivity {
                 usuario = Textusuario.getText().toString();
                 contraseña = Textcontraseña.getText().toString();
 
-                if ( !email.isEmpty() && !usuario.isEmpty() && !contraseña.isEmpty() && email.contains( "@" )) {
+                if ( !email.isEmpty() && !usuario.isEmpty() && !contraseña.isEmpty() && email.contains( "@" ) ) {
 
                     if (contraseña.length() >= 6) {
                         registrarUsuario();
@@ -95,6 +97,7 @@ public class Crear_Cuenta extends AppCompatActivity {
                     map.put( "email", email );
                     map.put( "usuario", usuario );
                     map.put( "contraseña", contraseña );
+                    map.put( "foto", foto);
 
                     String id = mAuth.getCurrentUser().getUid();
                     rDatabase.child( "Users" ).child( id ).setValue( map ).addOnCompleteListener( new OnCompleteListener<Void>() {

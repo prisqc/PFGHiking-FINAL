@@ -14,29 +14,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapter.RecyclerHolder> {
 
     private List<ModelRuta> dataRutas;
-    private List<ModelRuta> dataOriginal;
+    private List<ModelRuta> dataOriginal ;
     private Context mContext = null;
 
 
     public RecyclerRutaAdapter( List<ModelRuta> dataRutas, Context context){
         this.dataRutas = dataRutas;
         mContext = context;
-        dataOriginal = new ArrayList<>();
-        dataOriginal.addAll( dataRutas );
+        dataOriginal = this.dataRutas;
     }
 
     @NonNull
     @Override
     public RecyclerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View view = LayoutInflater.from( parent.getContext() ).inflate(R.layout.row_ruta_recycler, parent, false);
         RecyclerHolder holder = new RecyclerHolder(view);
+        if(dataOriginal.size() == 0) {
+            dataOriginal.addAll( dataRutas );
+        }
         return holder;
     }
 
@@ -85,7 +87,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
             } else {
                 for (ModelRuta r : dataOriginal) {
                     if (r.getNombre_ruta().toLowerCase().contains( txtbuscar.toLowerCase() ));
-                    dataOriginal.add( r );
+                    dataRutas.add( r );
                 }
             }
         }

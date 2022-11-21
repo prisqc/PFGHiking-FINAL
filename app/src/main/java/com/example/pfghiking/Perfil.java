@@ -37,8 +37,8 @@ public class Perfil extends AppCompatActivity {
 
     //Agregar foto de perfil
     private Button btnAdd;
-    private ImageView fotoP;
-    private String urlFoto;
+    private ImageView fotoP = null;
+    private String urlFoto = "";
     private StorageReference mStorage;
     private ProgressDialog progressDialog;
     private static final int GALLERY_INTENT = 1;
@@ -99,6 +99,7 @@ public class Perfil extends AppCompatActivity {
                 if (snapshot.exists()) {
                     String name = snapshot.child( "usuario" ).getValue().toString();
                     tvName.setText( name );
+                    String foto = snapshot.child( "foto" ).toString();
                     getFotoPp( snapshot.child( "foto" ).getValue().toString());
                 }
             }
