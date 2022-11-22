@@ -23,7 +23,6 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
     private List<ModelRuta> dataOriginal ;
     private Context mContext = null;
 
-
     public RecyclerRutaAdapter( List<ModelRuta> dataRutas, Context context){
         this.dataRutas = dataRutas;
         mContext = context;
@@ -101,6 +100,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
     public int getItemCount( ) {
         return dataRutas.size();
     }
+
 
 
     public class RecyclerHolder extends RecyclerView.ViewHolder {

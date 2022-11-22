@@ -1,7 +1,6 @@
 package com.example.pfghiking;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,8 +30,6 @@ public class Principal extends AppCompatActivity  implements SearchView.OnQueryT
     private List<ModelRuta> elements;
     private FirebaseDatabase mData;
 
-    private SharedPreferences preferences; //SHAREPREFERENCES - MANTENER SESION INICIADA
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,19 +51,9 @@ public class Principal extends AppCompatActivity  implements SearchView.OnQueryT
 
         mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
 
-
         adapter = new RecyclerRutaAdapter( elements , getApplicationContext());
+
         rvLista.setAdapter( adapter );
-
-        //SHAREPREFERENCES - MANTENER SESION INICIADA
-        init();
-       // validarSesion();
-        int usuario_id = preferences.getInt( "usuario_id", 0 );
-        String usuario = preferences.getString( "usuario", null );
-
-        if(usuario_id > 0 && usuario != null){
-
-        }         //SHAREPREFERENCES - MANTENER SESION INICIADA
 
 
         // Mostrar rutas creadas
@@ -96,23 +83,6 @@ public class Principal extends AppCompatActivity  implements SearchView.OnQueryT
 
 
 
-    //SHAREPREFERENCES - MANTENER SESION INICIADA
-    private void init(){
-        preferences = getSharedPreferences( "Preferences", MODE_PRIVATE );
-    }
-
-    private void cerrarSesion(){
-        preferences.edit().clear().apply();
-        Intent i2 = new Intent( Principal.this, MainActivity.class );
-        i2.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-        startActivity( i2 );
-    }
-
-    //private void validarSesion() {
-
-    //}
-    //fin SHAREPREFERENCES
-
 
     //**********************************************************************************************
     //PARA CREAR EL MENU EN EL PANTALLA PRINCIPAL
@@ -138,11 +108,10 @@ public class Principal extends AppCompatActivity  implements SearchView.OnQueryT
                 // finish();
                 return true;
             case R.id.opcion2:
-              //  Intent i2 = new Intent( Principal.this, MainActivity.class );
-             //   i2.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-               // startActivity( i2 );
+                Intent i2 = new Intent( Principal.this, MainActivity.class );
+                i2.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                startActivity( i2 );
                 finish();
-                cerrarSesion(); // SHAREPREFERENCES - MANTENER LA SESIÓN INCIADA
                 return true;
 
             default:
