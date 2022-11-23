@@ -33,7 +33,7 @@ public class Info_Ruta extends AppCompatActivity {
     private TextView time;
     private TextView country;
     private TextView city;
-    private ImageView imageView;
+    private ImageView imageView = null;
     private String urlRuta = "";
     private Button editButton;
     private List<ModelRuta> elements;
@@ -108,8 +108,8 @@ public class Info_Ruta extends AppCompatActivity {
                     String ciudad = snapshot.child( "rutas" ).getValue().toString();
                     city.setText( ciudad );
 
-                    String imagen = snapshot.child( "rutas" ).getValue().toString();
-                    getUrl(snapshot.child( "rutas" ).getValue().toString());
+                    String imagen = snapshot.child( "imagen" ).getValue().toString();
+                    getUrl(snapshot.child( "imagen" ).getValue().toString());
 
 
                 }
