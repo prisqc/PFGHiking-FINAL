@@ -27,6 +27,7 @@ public class MisRutas extends AppCompatActivity {
     private List<ModelRuta> elements2 = new ArrayList<>();
     private List<ModelRuta> dataOriginal;
     private FirebaseDatabase mData;
+    private RecyclerRutaAdapter.OnItemClickListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class MisRutas extends AppCompatActivity {
 
         mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
 
-        adapter = new RecyclerRutaAdapter( elements2, getApplicationContext());
+        adapter = new RecyclerRutaAdapter( elements2, getApplicationContext(), listener);
         rvLista.setAdapter( adapter );
 
         ValueEventListener elements = mData.getReference().child( "rutas" ).addValueEventListener( new ValueEventListener() {

@@ -21,12 +21,17 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
     private List<ModelRuta> dataRutas;
     private List<ModelRuta> dataOriginal;
     private Context mContext = null;
+    final RecyclerRutaAdapter.OnItemClickListener listener;
 
+    public interface OnItemClickListener {
+        void onItemClick(ModelRuta item);
+    }
 
-    public RecyclerRutaAdapter(List<ModelRuta> dataRutas, Context context ){
+    public RecyclerRutaAdapter(List<ModelRuta> dataRutas, Context context , RecyclerRutaAdapter.OnItemClickListener listener ){
         this.dataRutas = dataRutas;
         mContext = context;
         dataOriginal = this.dataRutas;
+        this.listener = listener;
     }
 
     @NonNull
@@ -44,13 +49,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
     @Override
     public void onBindViewHolder(@NonNull RecyclerRutaAdapter.RecyclerHolder holder, int position) {
 
-        ModelRuta rut = dataRutas.get( position );
-        holder.nombre_ruta.setText( rut.getNombre_ruta() );
-        holder.tvUsuario.setText( rut.getUsers().getEmail() );
-        holder.distancia.setText( rut.getDistancia() );
-        holder.desnivel.setText( rut.getDesnivel() );
-        holder.tiempo.setText( rut.getTiempo() );
-        Glide.with( holder.imgRuta.getContext() ).load( rut.getImagen() ).into( holder.imgRuta );
+        holder.binData(dataRutas.get( position ));
 
        /* String imagen = rut.getImagen();
         try{
@@ -124,6 +123,21 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
 
         }
 
+        public void binData(ModelRuta modelRuta) {
+            nombre_ruta.setText( modelRuta.getNombre_ruta() );
+            tvUsuario.setText( modelRuta.getUsers().getEmail() );
+            distancia.setText( modelRuta.getDistancia() );
+            desnivel.setText( modelRuta.getDesnivel() );
+            tiempo.setText( modelRuta.getTiempo() );
+            Glide.with( imgRuta.getContext() ).load( modelRuta.getImagen() ).into( imgRuta );
+
+            itemView.setOnClickListener( new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick( modelRuta );
+                }
+            } );
+        }
     } //Fin de clase Recycler holder
 
 

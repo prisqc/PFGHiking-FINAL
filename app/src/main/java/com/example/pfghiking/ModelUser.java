@@ -1,6 +1,8 @@
 package com.example.pfghiking;
 
-public class ModelUser {
+import java.io.Serializable;
+
+public class ModelUser implements Serializable {
     String id;
     String email;
     String nombre;

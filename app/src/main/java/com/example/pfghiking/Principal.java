@@ -31,7 +31,6 @@ public class Principal extends AppCompatActivity  implements SearchView.OnQueryT
     private FirebaseDatabase mData;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -52,7 +51,12 @@ public class Principal extends AppCompatActivity  implements SearchView.OnQueryT
 
         mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
 
-        adapter = new RecyclerRutaAdapter( elements , getApplicationContext());
+        adapter = new RecyclerRutaAdapter( elements, getApplicationContext(), new RecyclerRutaAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(ModelRuta item) {
+                moveToDescription(item);
+            }
+        } );
         rvLista.setAdapter( adapter );
 
 
@@ -143,6 +147,12 @@ public class Principal extends AppCompatActivity  implements SearchView.OnQueryT
     //metodo para SEARCH VIEW con querys para buscar una ruta por nombre con SearchView
 
 
+
+    public void moveToDescription(ModelRuta item){
+        Intent intent = new Intent(this, Info_Ruta.class);
+        intent.putExtra( "itemDetails", item );
+        startActivity( intent );
+    }
 
 
 
