@@ -31,6 +31,7 @@ public class Principal extends AppCompatActivity  implements SearchView.OnQueryT
     private FirebaseDatabase mData;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -52,7 +53,6 @@ public class Principal extends AppCompatActivity  implements SearchView.OnQueryT
         mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
 
         adapter = new RecyclerRutaAdapter( elements , getApplicationContext());
-
         rvLista.setAdapter( adapter );
 
 
@@ -136,8 +136,6 @@ public class Principal extends AppCompatActivity  implements SearchView.OnQueryT
         adapter.filtrado( newText );
         return false;
     }
-
-
 
 
 

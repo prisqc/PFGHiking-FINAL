@@ -22,8 +22,8 @@ public class Iniciar_Sesion extends AppCompatActivity {
     private EditText editTextemail;
     private EditText editTextcontraseña;
     private TextView olvidoContraseña;
-    private String email ="";
-    private String contraseña ="";
+    private String email = "";
+    private String contraseña = "";
 
     private FirebaseAuth isAuth;
 
@@ -36,17 +36,16 @@ public class Iniciar_Sesion extends AppCompatActivity {
         //Para ocultar el actionBar
         getSupportActionBar().hide();
 
-        Button myButton_is = this.<Button>findViewById(R.id.button_iniciar_sesion_IS);
-        myButton_is.setBackgroundColor(0XFF6A5F4B);
+        Button myButton_is = this.<Button>findViewById( R.id.button_iniciar_sesion_IS );
+        myButton_is.setBackgroundColor( 0XFF6A5F4B );
 
 
         isAuth = FirebaseAuth.getInstance();
 
-        editTextemail = (EditText) findViewById( R.id.iniciar_sesion_user );
-        editTextcontraseña = (EditText) findViewById( R.id.iniciar_sesion_pass );
-        myButton_is = (Button) findViewById( R.id.button_iniciar_sesion_IS );
+        editTextemail = ( EditText ) findViewById( R.id.iniciar_sesion_user );
+        editTextcontraseña = ( EditText ) findViewById( R.id.iniciar_sesion_pass );
+        myButton_is = ( Button ) findViewById( R.id.button_iniciar_sesion_IS );
         olvidoContraseña = ( TextView ) findViewById( R.id.textView_ForgotPass_IS );
-
 
         myButton_is.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -59,7 +58,7 @@ public class Iniciar_Sesion extends AppCompatActivity {
 
                     loginUser();
 
-                }else {
+                } else {
                     Toast.makeText( Iniciar_Sesion.this, "Complete los campos", Toast.LENGTH_SHORT ).show();
                 }
             }
@@ -69,7 +68,7 @@ public class Iniciar_Sesion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent oc_IS = new Intent( Iniciar_Sesion.this, Olvido_Contrasena.class);
+                Intent oc_IS = new Intent( Iniciar_Sesion.this, Olvido_Contrasena.class );
                 oc_IS.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
                 startActivity( oc_IS );
                 finish();
@@ -79,17 +78,17 @@ public class Iniciar_Sesion extends AppCompatActivity {
 
     } // FIN DEL METODO ONCREATE
 
-    private void loginUser(){
+    private void loginUser() {
         isAuth.signInWithEmailAndPassword( email, contraseña ).addOnCompleteListener( new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Intent is_IS = new Intent( Iniciar_Sesion.this, Principal.class );
                     is_IS.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
                     startActivity( is_IS );
-                    finish();
-                } else{
+                    //finish();
+                } else {
                     Toast.makeText( Iniciar_Sesion.this, "No se puede iniciar sesión, compruebe los datos", Toast.LENGTH_SHORT ).show();
                 }
 

@@ -2,7 +2,6 @@ package com.example.pfghiking;
 
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +19,11 @@ import java.util.stream.Collectors;
 public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapter.RecyclerHolder> {
 
     private List<ModelRuta> dataRutas;
-    private List<ModelRuta> dataOriginal ;
+    private List<ModelRuta> dataOriginal;
     private Context mContext = null;
 
-    public RecyclerRutaAdapter( List<ModelRuta> dataRutas, Context context){
+
+    public RecyclerRutaAdapter(List<ModelRuta> dataRutas, Context context ){
         this.dataRutas = dataRutas;
         mContext = context;
         dataOriginal = this.dataRutas;
@@ -33,9 +33,9 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
     @Override
     public RecyclerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from( parent.getContext() ).inflate(R.layout.row_ruta_recycler, parent, false);
-        RecyclerHolder holder = new RecyclerHolder(view);
-        if(dataOriginal.size() == 0) {
+        View view = LayoutInflater.from( parent.getContext() ).inflate( R.layout.row_ruta_recycler, parent, false );
+        RecyclerHolder holder = new RecyclerHolder( view );
+        if (dataOriginal.size() == 0) {
             dataOriginal.addAll( dataRutas );
         }
         return holder;
@@ -50,7 +50,9 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
         holder.distancia.setText( rut.getDistancia() );
         holder.desnivel.setText( rut.getDesnivel() );
         holder.tiempo.setText( rut.getTiempo() );
-        String imagen = rut.getImagen();
+        Glide.with( holder.imgRuta.getContext() ).load( rut.getImagen() ).into( holder.imgRuta );
+
+       /* String imagen = rut.getImagen();
         try{
             //ModelRuta sample = dataRutas.get( holder.getAdapterPosition() );
             if(imagen != null){
@@ -61,7 +63,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
             }
         }catch (Exception e){
             Log.d("Exception", "e: " + e);
-        }
+        }*/
 
 
 
@@ -71,9 +73,9 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
 
     //**********************************************************************************************
 
-    public void filtrado(String txtbuscar){
+    public void filtrado(String txtbuscar) {
         int longitud = txtbuscar.length();
-        if (longitud == 0){
+        if (longitud == 0) {
             dataRutas.clear();
             dataRutas.addAll( dataOriginal );
         } else {
@@ -85,7 +87,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
                 dataRutas.addAll( colection );
             } else {
                 for (ModelRuta r : dataOriginal) {
-                    if (r.getNombre_ruta().toLowerCase().contains( txtbuscar.toLowerCase() ));
+                    if (r.getNombre_ruta().toLowerCase().contains( txtbuscar.toLowerCase() )) ;
                     dataRutas.add( r );
                 }
             }
@@ -94,16 +96,14 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
     }
 
 
-
-
     @Override
-    public int getItemCount( ) {
+    public int getItemCount() {
         return dataRutas.size();
     }
 
 
-
     public class RecyclerHolder extends RecyclerView.ViewHolder {
+
         private TextView nombre_ruta;
         private TextView tvUsuario;
         private TextView distancia;
@@ -112,21 +112,22 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
         private ImageView imgRuta;
 
 
+        public RecyclerHolder(final View itemView) {
+            super( itemView );
+            nombre_ruta = itemView.findViewById( R.id.TV_name_Layout );
+            tvUsuario = itemView.findViewById( R.id.TV_User_Layout );
+            distancia = itemView.findViewById( R.id.TV_distRuta_Layout );
+            desnivel = itemView.findViewById( R.id.TV_desnRuta_Layout );
+            tiempo = itemView.findViewById( R.id.TV_timeRuta_Layout );
+            imgRuta = itemView.findViewById( R.id.img_Ruta_Layout );
 
-        public RecyclerHolder(final View item) {
-            super(item);
-            nombre_ruta = item.findViewById( R.id.TV_name_Layout );
-            tvUsuario = item.findViewById( R.id.TV_User_Layout );
-            distancia = item.findViewById( R.id.TV_distRuta_Layout );
-            desnivel = item.findViewById( R.id.TV_desnRuta_Layout );
-            tiempo = item.findViewById( R.id.TV_timeRuta_Layout );
-            imgRuta = item.findViewById( R.id.img_Ruta_Layout );
+
         }
-
-
 
     } //Fin de clase Recycler holder
 
 
 
-} //FIN DE LA CLASE RecyclerRutaAdapter
+}
+
+ //FIN DE LA CLASE RecyclerRutaAdapter

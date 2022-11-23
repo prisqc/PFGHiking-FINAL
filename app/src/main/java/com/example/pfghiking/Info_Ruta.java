@@ -2,6 +2,7 @@ package com.example.pfghiking;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,8 @@ public class Info_Ruta extends AppCompatActivity {
     private TextView time;
     private TextView country;
     private TextView city;
+    private ImageView imageView;
+    private String urlRuta;
     private Button editButton;
     private List<ModelRuta> elements;
 
@@ -50,6 +53,18 @@ public class Info_Ruta extends AppCompatActivity {
         time = findViewById( R.id.TV_timeRuta_IR );
         country = findViewById( R.id.TV_paisRuta_IR );
         city = findViewById( R.id.TV_cityRuta_IR );
+        imageView = findViewById( R.id.imgRuta_IR );
+
+
+        itemDetails = (ModelRuta ) getIntent().getExtras().getSerializable( "itemDetails" );
+        title.setText( itemDetails.getNombre_ruta() );
+        description.setText( itemDetails.getDescripcion() );
+        distance.setText( itemDetails.getDistancia() );
+        altitude.setText( itemDetails.getDesnivel() );
+        time.setText( itemDetails.getTiempo() );
+        country.setText( itemDetails.getPais() );
+        city.setText( itemDetails.getCiudad() );
+        imageView.setImageResource( Integer.parseInt( itemDetails.getImagen().toString() ) );
 
 
         getInfoRuta(); //metodo para mostrar la información de la ruta
