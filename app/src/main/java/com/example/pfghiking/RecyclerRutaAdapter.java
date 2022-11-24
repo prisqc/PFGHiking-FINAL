@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -109,6 +110,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
         private TextView desnivel;
         private TextView tiempo;
         private ImageView imgRuta;
+        public RelativeLayout layoutDelete; //PARA BORRA ITEM RV
 
 
         public RecyclerHolder(final View itemView) {
@@ -119,7 +121,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
             desnivel = itemView.findViewById( R.id.TV_desnRuta_Layout );
             tiempo = itemView.findViewById( R.id.TV_timeRuta_Layout );
             imgRuta = itemView.findViewById( R.id.img_Ruta_Layout );
-
+            layoutDelete = itemView.findViewById( R.id.LayoutBorrar ); //PARA BORRA ITEM RV
 
         }
 
@@ -139,6 +141,12 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
             } );
         }
     } //Fin de clase Recycler holder
+
+
+    public void removeItem(int position){
+        dataRutas.remove( position );
+        notifyItemRemoved( position );
+    }
 
 
 
