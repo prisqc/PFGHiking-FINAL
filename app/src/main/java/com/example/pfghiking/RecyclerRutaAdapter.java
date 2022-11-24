@@ -143,9 +143,17 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
     } //Fin de clase Recycler holder
 
 
+
+    //PARA REMOVER ITEM RV
     public void removeItem(int position){
         dataRutas.remove( position );
         notifyItemRemoved( position );
+    }
+
+    //PARA RESTAURAR EL ITEM REMOVIDO DEL RV
+    public void restoreItem (ModelRuta mRuta, int position){
+        dataRutas.add( position, mRuta );
+        notifyItemInserted( position );
     }
 
 

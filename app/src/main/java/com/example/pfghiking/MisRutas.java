@@ -1,13 +1,17 @@
 package com.example.pfghiking;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,7 +23,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class MisRutas extends AppCompatActivity {
+public class MisRutas extends AppCompatActivity implements     //PARA REMOVER ITEM RV
+        RecyclerRutaTouchHelper.RecyclerRutaTouchHelperListener {    //PARA REMOVER ITEM RV
 
     private FirebaseAuth mAuth;
     private RecyclerView rvLista;
@@ -48,6 +53,15 @@ public class MisRutas extends AppCompatActivity {
 
         adapter = new RecyclerRutaAdapter( elements2, getApplicationContext(), listener);
         rvLista.setAdapter( adapter );
+
+        //PARA REMOVER ITEM RV
+        ItemTouchHelper.SimpleCallback simpleCallback =
+                new RecyclerRutaTouchHelper( 0, ItemTouchHelper.LEFT, MisRutas.this  );
+
+        //PARA REMOVER ITEM RV
+        new ItemTouchHelper( simpleCallback ).attachToRecyclerView( rvLista );
+
+
 
         ValueEventListener elements = mData.getReference().child( "rutas" ).addValueEventListener( new ValueEventListener() {
             @Override
@@ -96,7 +110,37 @@ public class MisRutas extends AppCompatActivity {
     }
 
 
+    //PARA REMOVER ITEM RV
+    @Override
+    public void onSwipe(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+        if (viewHolder instanceof RecyclerRutaAdapter.RecyclerHolder){
+            String nombre = elements2.get( viewHolder.getAdapterPosition() ).getNombre_ruta();
+            final ModelRuta rutaBorrada = elements2.get( viewHolder.getAdapterPosition() );
+            final int deleteIntex = viewHolder.getAdapterPosition();
 
+            adapter.removeItem( viewHolder.getAdapterPosition() );
+
+            recuperarRutaBorrada( viewHolder, nombre, rutaBorrada, deleteIntex); //recuperarRutaBorrada( viewHolder, nombre,  rutaBorrada, deleteIntex);
+
+        }
+    }
+
+    private void recuperarRutaBorrada(RecyclerView.ViewHolder viewHolder, String nombre,
+                                      final ModelRuta rutaBorrada, final int deleteIntex){ // String nombre
+
+        Snackbar snackbar = Snackbar.make( ((RecyclerRutaAdapter.RecyclerHolder)viewHolder).layoutDelete,
+                "ELIMINADA", Snackbar.LENGTH_SHORT);
+        snackbar.setAction( "DESHACER", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.restoreItem( rutaBorrada, deleteIntex );
+            }
+        } );
+
+        snackbar.setActionTextColor( Color.GREEN );
+        snackbar.show();
+
+    }
 
 
 }
