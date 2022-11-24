@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Principal"
-    android:background="@color/white"
+    android:background="@color/lightbrown"
     android:weightSum="4"
     android:orientation="vertical">
 

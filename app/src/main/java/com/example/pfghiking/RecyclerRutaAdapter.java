@@ -38,7 +38,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
     @Override
     public RecyclerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from( parent.getContext() ).inflate( R.layout.row_ruta_recycler, parent, false );
+        View view = LayoutInflater.from( parent.getContext() ).inflate( R.layout.row_ruta_recycler_del, parent, false );
         RecyclerHolder holder = new RecyclerHolder( view );
         if (dataOriginal.size() == 0) {
             dataOriginal.addAll( dataRutas );

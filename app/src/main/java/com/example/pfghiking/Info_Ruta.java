@@ -1,7 +1,6 @@
 package com.example.pfghiking;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -34,7 +33,7 @@ public class Info_Ruta extends AppCompatActivity {
     private TextView country;
     private TextView city;
     private ImageView imageView = null;
-    private String urlRuta = "";
+    private String imagen = "";
     private Button editButton;
     private List<ModelRuta> elements;
 
@@ -71,8 +70,6 @@ public class Info_Ruta extends AppCompatActivity {
         country.setText( itemDetails.getPais() );
         city.setText( itemDetails.getCiudad() );
 
-       // urlRuta = rDataBase.child( "rutas" ).child( "id" ).child( "imagen" ).toString();
-       // getUrl( urlRuta);
 
 
                 getInfoRuta(); //metodo para mostrar la información de la ruta
@@ -83,7 +80,7 @@ public class Info_Ruta extends AppCompatActivity {
     private void getInfoRuta(){
         itemDetails = ( ModelRuta ) getIntent().getExtras().getSerializable( "itemDetails" );
         String id = mAuth.getCurrentUser().getUid();
-        rDataBase.child( "rutas" ).child( "id" ).addValueEventListener( new ValueEventListener() {
+        rDataBase.child( "rutas" ).child( rDataBase.child( "rutas" ).getKey() ).addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if ( snapshot.exists()){
@@ -108,8 +105,9 @@ public class Info_Ruta extends AppCompatActivity {
                     String ciudad = snapshot.child( "rutas" ).getValue().toString();
                     city.setText( ciudad );
 
-                    String imagen = snapshot.child( "imagen" ).getValue().toString();
-                    getUrl(snapshot.child( "imagen" ).getValue().toString());
+                    imagen = getUrl(snapshot.child( "imagen" ).getValue().toString());
+                    Glide.with( imageView.getContext() ).load( imagen ).into( imageView );
+
 
 
                 }
@@ -126,28 +124,29 @@ public class Info_Ruta extends AppCompatActivity {
 
 
 
-    private void getUrl( String urlRuta) {
+    private String getUrl(String urlRuta) {
 
-        rDataBase.child( "rutas" ).child( "id" ).get().addOnSuccessListener( new OnSuccessListener<DataSnapshot>() {
+        rDataBase.child( "rutas" ).child(  "id"  ).get().addOnSuccessListener( new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
 
-                String url = dataSnapshot.child( "imagen" ).getKey();
+                String url = dataSnapshot.getKey().toString();
 
-                try {
+                //try {
                     if (!url.equals( "" ) ){
                         Toast toast = Toast.makeText( getApplicationContext(), "Cargando Foto", Toast.LENGTH_SHORT);
                         //toast.setGravity( Gravity.TOP, 0, 1 );
                         toast.show();
-                        Glide.with( Info_Ruta.this ).load( urlRuta )
-                                .into( imageView );
-
+                        Glide.with( Info_Ruta.this ).load( imagen )
+                                .into( (ImageView) findViewById( R.id.imageView ) );
                     }
-                }catch (Exception e){
-                    Log.v( "Error", "e: "+ e );
-                }
+               // }catch (Exception e){
+                 //   Log.v( "Error", "e: "+ e );
+                //}
+
             }
         } );
+        return urlRuta;
     }
 
 }

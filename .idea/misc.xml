@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/prisi/AndroidStudioProjects/PFGHiking/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.15" />
+        <entry key="..\:/Users/prisi/AndroidStudioProjects/PFGHiking/app/src/main/res/drawable/ic_delete.xml" value="0.1" />
+        <entry key="..\:/Users/prisi/AndroidStudioProjects/PFGHiking/app/src/main/res/drawable/ic_favorite_border.xml" value="0.1" />
         <entry key="..\:/Users/prisi/AndroidStudioProjects/PFGHiking/app/src/main/res/layout/activity_crear_cuenta.xml" value="0.165625" />
         <entry key="..\:/Users/prisi/AndroidStudioProjects/PFGHiking/app/src/main/res/layout/activity_crear_ruta.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/prisi/AndroidStudioProjects/PFGHiking/app/src/main/res/layout/activity_info_ruta.xml" value="0.3" />
@@ -12,7 +15,8 @@
         <entry key="..\:/Users/prisi/AndroidStudioProjects/PFGHiking/app/src/main/res/layout/activity_olvido_contrasena.xml" value="0.1" />
         <entry key="..\:/Users/prisi/AndroidStudioProjects/PFGHiking/app/src/main/res/layout/activity_perfil.xml" value="0.2640625" />
         <entry key="..\:/Users/prisi/AndroidStudioProjects/PFGHiking/app/src/main/res/layout/activity_principal.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/prisi/AndroidStudioProjects/PFGHiking/app/src/main/res/layout/row_ruta_recycler.xml" value="0.5" />
+        <entry key="..\:/Users/prisi/AndroidStudioProjects/PFGHiking/app/src/main/res/layout/row_ruta_recycler.xml" value="0.3207171314741036" />
+        <entry key="..\:/Users/prisi/AndroidStudioProjects/PFGHiking/app/src/main/res/layout/row_ruta_recycler_del.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/prisi/AndroidStudioProjects/PFGHiking/app/src/main/res/menu/menu.xml" value="0.1796875" />
       </map>
     </option>
