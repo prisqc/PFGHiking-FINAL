@@ -1,5 +1,7 @@
 package com.example.pfghiking;
 
+import android.widget.Button;
+
 import java.io.Serializable;
 
 public class ModelRuta  implements Serializable {
@@ -14,10 +16,11 @@ public class ModelRuta  implements Serializable {
         String ciudad;
         ModelUser users;
         String imagen;
+        Button dateButton;
 
 
 
-        public ModelRuta() {
+        public ModelRuta(String title, ModelUser usuario, String description, String distancia, String desnivel, String time, String pais, String city, String urlImagen, Button dateButton) {
         }
 
     public ModelRuta(String nombre_ruta, ModelUser users, String distancia,
@@ -32,7 +35,7 @@ public class ModelRuta  implements Serializable {
 
 
     public ModelRuta(String nombre_ruta, ModelUser users, String descripcion, String distancia,
-                     String desnivel, String tiempo, String pais, String ciudad) {
+                     String desnivel, String tiempo, String pais, String ciudad, Button dateButton) {
         this.nombre_ruta = nombre_ruta;
         this.users = users;
         this.descripcion = descripcion;
@@ -42,6 +45,7 @@ public class ModelRuta  implements Serializable {
         this.pais = pais;
         this.ciudad = ciudad;
         this.imagen = imagen;
+        this.dateButton = dateButton;
     }
 
 
@@ -153,5 +157,11 @@ public class ModelRuta  implements Serializable {
             this.imagen = imagen;
         }
 
+    public Button getDateButton() {
+        return dateButton;
+    }
 
+    public void setDateButton(Button dateButton) {
+        this.dateButton = dateButton;
+    }
 }
