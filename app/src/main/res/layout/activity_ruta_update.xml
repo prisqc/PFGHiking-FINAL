@@ -21,7 +21,7 @@
     <EditText
         android:id="@+id/TV_nombreRuta_UR"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="70dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="30dp"

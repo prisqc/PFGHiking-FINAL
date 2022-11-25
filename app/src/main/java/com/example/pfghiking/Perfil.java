@@ -155,7 +155,6 @@ public class Perfil extends AppCompatActivity {
                 try {
                     if (!url.equals( "" ) ){
                         Toast toast = Toast.makeText( getApplicationContext(), "Cargando Foto", Toast.LENGTH_SHORT);
-                        //toast.setGravity( Gravity.TOP, 0, 1 );
                         toast.show();
                         Glide.with( Perfil.this ).load( urlFoto )
                                 .into( fotoP );

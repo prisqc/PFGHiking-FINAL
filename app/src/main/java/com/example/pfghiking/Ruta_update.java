@@ -1,12 +1,19 @@
 package com.example.pfghiking;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +24,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.List;
 
@@ -32,9 +42,15 @@ public class Ruta_update extends AppCompatActivity {
     private EditText time;
     private EditText country;
     private EditText city;
+    private Button addPic;
+    private Button updRuta;
     private ImageView imageView = null;
     private String imagen = "";
     private List<ModelRuta> elements;
+
+    private StorageReference mStorage;
+    private ProgressDialog progressDialog;
+    private static final int GALLERY_INTENT = 1;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -47,6 +63,7 @@ public class Ruta_update extends AppCompatActivity {
 
 
     mAuth = FirebaseAuth.getInstance();
+    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     rDataBase = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" ).getReference();
 
     title = findViewById( R.id.TV_nombreRuta_UR );
@@ -58,8 +75,9 @@ public class Ruta_update extends AppCompatActivity {
     city = findViewById( R.id.TV_cityRuta_UR );
     imageView = findViewById( R.id.imgRuta_UR );
 
+     progressDialog = new ProgressDialog( this );
 
-    itemDetails = (ModelRuta ) getIntent().getExtras().getSerializable( "itemDetails" );
+        itemDetails = (ModelRuta ) getIntent().getExtras().getSerializable( "itemDetails" );
 
         title.setText( itemDetails.getNombre_ruta()); ;
         description.setText( itemDetails.getDescripcion() );
@@ -68,6 +86,28 @@ public class Ruta_update extends AppCompatActivity {
         time.setText( itemDetails.getTiempo() );
         country.setText( itemDetails.getPais() );
         city.setText( itemDetails.getCiudad() );
+
+
+        //Agregar foto de perfil - instanciar onjeto
+        addPic = findViewById( R.id.button_addPic_UR );
+        addPic.setBackgroundColor( 0XFF6A5F4B );
+
+        updRuta = findViewById( R.id.button_update_UR );
+        updRuta.setBackgroundColor( 0XFF6A5F4B );
+
+        mStorage = FirebaseStorage.getInstance().getReference();
+
+
+        addPic.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent( Intent.ACTION_PICK );
+                intent.setType( "image/*" );
+                startActivityForResult( intent, GALLERY_INTENT );
+
+            }
+        } );
+
 
 
     getInfoRuta(); //metodo para mostrar la información de la ruta
@@ -103,8 +143,9 @@ public class Ruta_update extends AppCompatActivity {
                     String ciudad = snapshot.child( "rutas" ).getValue().toString();
                     city.setText( ciudad );
 
-                    imagen = getUrl(snapshot.child( "imagen" ).getValue().toString());
-                    Glide.with( imageView.getContext() ).load( imagen ).into( imageView );
+                    imagen = snapshot.child( "imagen" ).toString();
+                    getFotoPp( snapshot.child( "imagen" ).getValue().toString());
+
 
                 }
             }
@@ -120,6 +161,84 @@ public class Ruta_update extends AppCompatActivity {
 
 
 
+
+    //METODO PARA LLAMAR A LA URL DE LA FOTO QUE CONTIENE EL RV
+    private void getFotoPp( String imagen) {
+
+        rDataBase.child( "Users" ).child( mAuth.getCurrentUser().getUid() ).get().addOnSuccessListener( new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+
+                String url = dataSnapshot.getKey().toString();
+
+                try {
+                    if (!url.equals( "" ) ){
+                        Toast toast = Toast.makeText( getApplicationContext(), "Cargando Foto", Toast.LENGTH_SHORT);
+                        toast.show();
+                        Glide.with( Ruta_update.this ).load( imagen )
+                                .into( imageView );
+
+                    }
+                }catch (Exception e){
+                    Log.v( "Error", "e: "+ e );
+                }
+            }
+        } );
+    }
+
+
+
+
+
+    //AGREGAR FOTO DE PERFIL - METODO ONACTIVITYRESULT
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult( requestCode, resultCode, data );
+        if (requestCode == GALLERY_INTENT && resultCode == RESULT_OK) {
+
+            progressDialog.setTitle( "Subiendo..." );
+            progressDialog.setMessage( "Subiendo foto a Firebase" );
+            progressDialog.setCancelable( false );
+            progressDialog.show();
+
+
+            Uri uri = data.getData();
+            StorageReference filePath = mStorage.child( "fotos" ).child( uri.getLastPathSegment() );
+
+
+
+            filePath.putFile( uri ).addOnSuccessListener( new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    progressDialog.dismiss(); //finaliza la barra de carga
+
+                    //OBTIENE EL URI DE LA FOTO
+                    filePath.getDownloadUrl().addOnSuccessListener( new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+
+                            Glide.with( Ruta_update.this)
+                                    .load(uri).into((ImageView) findViewById( R.id.imgRuta_UR ));
+                            Toast.makeText( Ruta_update.this, "Se subió correctamente la foto", Toast.LENGTH_SHORT ).show();
+
+                            //recupera la Url y asignala en el campo determinado "imagen"
+                            imagen = uri.toString();
+                            rDataBase.child( "Users" ).child( mAuth.getCurrentUser().getUid() ).child( "foto" ).setValue( imagen );
+
+                        }
+                    } );
+
+
+                }
+            } );
+
+        }
+
+    } // FIN DEL METODO OnActivityResult
+
+
+
+    // METODO QUE DEVUELVE LA URL DE LA IMAGEN DE LA RUTA QUE SE SELECCIONADO
     private String getUrl(String urlRuta) {
 
         rDataBase.child( "rutas" ).child(  "id"  ).get().addOnSuccessListener( new OnSuccessListener<DataSnapshot>() {
@@ -128,18 +247,13 @@ public class Ruta_update extends AppCompatActivity {
 
                 String url = dataSnapshot.getKey().toString();
 
-                //try {
-                if (!url.equals( "" ) ){
-                    Toast toast = Toast.makeText( getApplicationContext(), "Cargando Foto", Toast.LENGTH_SHORT);
+                if (!url.equals( "" ) ) {
+                    Toast toast = Toast.makeText( getApplicationContext(), "Cargando Foto", Toast.LENGTH_SHORT );
                     //toast.setGravity( Gravity.TOP, 0, 1 );
                     toast.show();
                     Glide.with( Ruta_update.this ).load( imagen )
-                            .into( (ImageView) findViewById( R.id.imageView ) );
+                            .into( ( ImageView ) findViewById( R.id.imageView ) );
                 }
-                // }catch (Exception e){
-                //   Log.v( "Error", "e: "+ e );
-                //}
-
             }
         } );
         return urlRuta;
