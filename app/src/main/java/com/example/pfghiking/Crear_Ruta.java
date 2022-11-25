@@ -57,10 +57,6 @@ public class Crear_Ruta extends AppCompatActivity {
     private static final int GALLERY_INTENT = 1;
 
 
-  //  private DatePickerDialog datePickerDialog;
-   // private Button dateButton;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -76,22 +72,16 @@ public class Crear_Ruta extends AppCompatActivity {
         editTexttime = findViewById( R.id.ET_timeRuta_CR );
         editTextPais = findViewById( R.id.ET_paisRuta_CR );
         editTextCity = findViewById( R.id.ET_cityRuta_CR );
-      //  dateButton = findViewById( R.id.datePickerButton );
-
-
-        //datepicker
-//        initDatePicker();
-
-      //  dateButton.setText( getTodaysDate() );
-
 
         mAuth = FirebaseAuth.getInstance();
         mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
 
-
-
         myButton_pu  = this.<Button>findViewById(R.id.button_publicar_CR);
         myButton_pu.setBackgroundColor(0XFF6A5F4B);
+
+
+
+        //METODO PARA PUBLICAR RUTA CREADA
 
         myButton_pu.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -145,7 +135,9 @@ public class Crear_Ruta extends AppCompatActivity {
         });
 
 
-        //Agregar foto a Ruta
+
+        //METODO PARA AGREGAR FOTO A LA RUTA
+
         myButton_add  = this.<Button>findViewById(R.id.button_addPic_CR);
         myButton_add.setBackgroundColor(0XFF6A5F4B);
 
@@ -203,13 +195,7 @@ public class Crear_Ruta extends AppCompatActivity {
                                     .load( uri ).into( (ImageView) findViewById( R.id.img_CR )); //.centerCrop().placeholder( R.id.img_CR ).error( R.id.img_CR )
                             Toast.makeText( Crear_Ruta.this, "Se subió correctamente la foto", Toast.LENGTH_SHORT ).show();
 
-                            //recupera la Url y asignala en el campo determinado "imagen"
                             urlImagen = uri.toString();
-                           // HashMap<String, Object> map = new HashMap<>();
-                           // map.put( "imagen",imagen );
-                         //   mData.getReference().child( "rutas" ).child( Objects.requireNonNull( mData.getReference().getKey() ) ).child( "imagen" ).setValue( urlImagen );
-
-
 
                         }
                     } );
@@ -232,75 +218,6 @@ public class Crear_Ruta extends AppCompatActivity {
         mData.getReference().child( "rutas" ).child(key).setValue( ruta );
 
     }
-
-
-    /*
-    private String getTodaysDate() {
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get( Calendar.YEAR );
-        int month = cal.get( Calendar.MONTH );
-        month = month + 1;
-        int day = cal.get( Calendar.DAY_OF_MONTH );
-
-        return  makeDateString(  day, month, year );
-
-    }*/
-
-
-
-
-
-/*
-    private void initDatePicker(){
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                month = month +1;
-                String date = makeDateString(day, month, year);
-                dateButton.setText( date );
-            }
-        };
-
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get( Calendar.YEAR );
-        int month = cal.get( Calendar.MONTH );
-        int day = cal.get( Calendar.DAY_OF_MONTH );
-
-        int style = AlertDialog.THEME_HOLO_LIGHT;
-
-        datePickerDialog = new DatePickerDialog( this,
-                style, dateSetListener, year, month, day );
-
-        datePickerDialog.getDatePicker().setMaxDate( System.currentTimeMillis() );
-    }
-
-    private String makeDateString(int day, int month, int year){
-        return getMonthFormat(month) + " " + day + " " + year;
-    }
-
-    private String getMonthFormat(int month){
-        if(month == 1){ return "JAN";}
-        if(month == 2){ return "FEB";}
-        if(month == 3){ return "MAR";}
-        if(month == 4){ return "APR";}
-        if(month == 5){ return "MAY";}
-        if(month == 6){ return "JUN";}
-        if(month == 7){ return "JUL";}
-        if(month == 8){ return "AUG";}
-        if(month == 9){ return "SEP";}
-        if(month == 10){ return "OCT";}
-        if(month == 11){ return "NOV";}
-        if(month == 12){ return "DEC";}
-
-        return  "JAN";
-
-    }
-
-
-    public void openDataPicker(View view){
-        datePickerDialog.show();
-    } */
-
 
 
 

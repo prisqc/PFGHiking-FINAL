@@ -4,9 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -44,10 +41,9 @@ public class MisRutas extends AppCompatActivity implements     //PARA REMOVER IT
         setContentView( R.layout.activity_mis_rutas );
 
         //Para ocultar el actionBar
-       // getSupportActionBar().hide();
+        getSupportActionBar().hide();
 
         mAuth = FirebaseAuth.getInstance();
-
         rvLista = findViewById( R.id.RV_Rutas_PP );
         rvLista.setLayoutManager( new LinearLayoutManager( this ) );
 
@@ -55,8 +51,17 @@ public class MisRutas extends AppCompatActivity implements     //PARA REMOVER IT
 
         mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
 
-        adapter = new RecyclerRutaAdapter( elements2, getApplicationContext(), listener);
+
+        //METODO PARA EDITAR LA RUTA
+         adapter = new RecyclerRutaAdapter( elements2, getApplicationContext(), new RecyclerRutaAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(ModelRuta item) {
+                moveToDescription(item);
+            }
+        } );
         rvLista.setAdapter( adapter );
+
+
 
         //PARA REMOVER ITEM RV
         ItemTouchHelper.SimpleCallback simpleCallback =
@@ -66,7 +71,7 @@ public class MisRutas extends AppCompatActivity implements     //PARA REMOVER IT
         new ItemTouchHelper( simpleCallback ).attachToRecyclerView( rvLista );
 
 
-
+        //metodo para mostrar las rutas del usuario
         ValueEventListener elements = mData.getReference().child( "rutas" ).addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -89,7 +94,10 @@ public class MisRutas extends AppCompatActivity implements     //PARA REMOVER IT
         } );
     }
 
-    // esto busca las rutas del usuario que ha ingresado al app
+
+
+
+    // METODO PARA MOSTRAR EN PANTALLA LAS RUTAS DEL USUARIO QUE HA INGRESADO EN LA APP
     public void  buscar (final String txtBuscar){
         int longitud = txtBuscar.length();
         if (longitud == 0){
@@ -112,6 +120,8 @@ public class MisRutas extends AppCompatActivity implements     //PARA REMOVER IT
 
         adapter.notifyDataSetChanged();
     }
+
+
 
 
     //PARA REMOVER ITEM RV
@@ -150,41 +160,13 @@ public class MisRutas extends AppCompatActivity implements     //PARA REMOVER IT
 
 
 
-
-    //**********************************************************************************************
-    //PARA CREAR EL MENU EN EL PANTALLA PRINCIPAL
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate( R.menu.menu_mis_rutas, menu );
-        return true;
+    //METODO QUE TE LLEVA A LA PANTALLA DE ACTUALIZAR RUTA
+    public void moveToDescription(ModelRuta item){
+        Intent intent = new Intent(this, Ruta_update.class);
+        intent.putExtra( "itemDetails", item );
+        startActivity( intent );
     }
 
-
-
-    //**********************************************************************************************
-    //PARA CREAR OPCIONES DEL MENU EN LA PANTALLA PRINCIPAL
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.icon_update:
-                Intent i = new Intent( MisRutas.this, Perfil.class );
-                i.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-                startActivity( i );
-                // finish();
-                return true;
-            case R.id.icon_delete:
-                Intent i2 = new Intent( MisRutas.this, MainActivity.class );
-                i2.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
-                startActivity( i2 );
-                finish();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected( item );
-        }
-    } // fin del menú
 
 
 

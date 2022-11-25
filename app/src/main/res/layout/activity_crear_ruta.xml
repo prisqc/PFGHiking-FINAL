@@ -171,26 +171,7 @@
 
 
 
-    <Button
-        android:id="@+id/datePickerButton"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="JAN 01 2023"
-        android:textSize="20dp"
-        android:textColor="@color/brown"
-        style="?android:spinnerStyle"
-        android:hint="Ingreses la fecha"
-        android:textAlignment="center"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="580dp"
-        android:onClick="openDataPicker"/>
-
-
-    <Button
+     <Button
         android:id="@+id/button_publicar_CR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Ruta_update">
+
+    <ImageView
+        android:id="@+id/imageViewUR"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.4"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/TV_nombreRuta_UR"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
+        android:textAlignment="center"
+        android:textColorHint="@color/lightbrown"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgRuta_UR"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/TV_nombreRuta_UR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/Title_descRuta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/imgRuta_UR"
+        android:layout_marginEnd="30dp"
+        android:text="Descripción de la Ruta"
+        android:textAlignment="textStart"
+        android:textColor="@color/brown"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/TV_descRuta_UR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/Title_descRuta"
+        android:layout_marginEnd="30dp"
+        android:lines="3"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/lightbrown"
+        android:textSize="15dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/Title_distRuta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/TV_descRuta_UR"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Distancia:"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/brown"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/TV_distRuta_UR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintStart_toEndOf="@+id/Title_distRuta"
+        app:layout_constraintTop_toBottomOf="@+id/TV_descRuta_UR"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/lightbrown"
+        android:textSize="15dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/Title_desnRuta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/Title_distRuta"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Desnivel:"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/brown"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:id="@+id/TV_desnRuta_UR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintStart_toEndOf="@+id/Title_distRuta"
+        app:layout_constraintTop_toBottomOf="@+id/TV_distRuta_UR"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/lightbrown"
+        android:textSize="15dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/Title_timeRuta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/Title_desnRuta"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Tiempo:"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/brown"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:id="@+id/TV_timeRuta_UR"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintStart_toEndOf="@+id/Title_timeRuta"
+        app:layout_constraintTop_toBottomOf="@+id/TV_desnRuta_UR"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/lightbrown"
+        android:textSize="15dp"
+        android:textStyle="italic"/>
+
+
+    <TextView
+        android:id="@+id/Title_paisRuta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/Title_timeRuta"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="País:"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/brown"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+
+
+
+    <EditText
+        android:id="@+id/TV_paisRuta_UR"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintStart_toEndOf="@+id/Title_timeRuta"
+        app:layout_constraintTop_toBottomOf="@+id/TV_timeRuta_UR"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/lightbrown"
+        android:textSize="15dp"
+        android:textStyle="italic" />
+
+
+    <TextView
+        android:id="@+id/Title_ciudadRuta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/Title_paisRuta"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Ciudad:"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/brown"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:id="@+id/TV_cityRuta_UR"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintStart_toEndOf="@+id/Title_ciudadRuta"
+        app:layout_constraintTop_toBottomOf="@+id/TV_paisRuta_UR"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/lightbrown"
+        android:textSize="15dp"
+        android:textStyle="italic" />
+
+
+    <Button
+        android:id="@+id/button_addPic_UR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="650dp"
+        android:padding="10dp"
+        app:cornerRadius="20dp"
+        android:text="  + Foto  "
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/button_update_UR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="650dp"
+        android:layout_marginEnd="30dp"
+        android:padding="10dp"
+        app:cornerRadius="20dp"
+        android:text="actualizar"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
