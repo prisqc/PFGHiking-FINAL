@@ -1,14 +1,11 @@
 package com.example.pfghiking;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -27,8 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import java.util.Calendar;
 
 public class Crear_Ruta extends AppCompatActivity {
 
@@ -62,8 +57,8 @@ public class Crear_Ruta extends AppCompatActivity {
     private static final int GALLERY_INTENT = 1;
 
 
-    private DatePickerDialog datePickerDialog;
-    private Button dateButton;
+  //  private DatePickerDialog datePickerDialog;
+   // private Button dateButton;
 
 
     @Override
@@ -81,17 +76,16 @@ public class Crear_Ruta extends AppCompatActivity {
         editTexttime = findViewById( R.id.ET_timeRuta_CR );
         editTextPais = findViewById( R.id.ET_paisRuta_CR );
         editTextCity = findViewById( R.id.ET_cityRuta_CR );
+      //  dateButton = findViewById( R.id.datePickerButton );
 
 
         //datepicker
-        initDatePicker();
-        dateButton = findViewById( R.id.datePickerButton );
+//        initDatePicker();
 
-        dateButton.setText( getTodaysDate() );
-
+      //  dateButton.setText( getTodaysDate() );
 
 
-                mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
 
 
@@ -112,7 +106,6 @@ public class Crear_Ruta extends AppCompatActivity {
                 city = editTextCity.getText().toString();
 
 
-
                 mData.getReference().child( "Users" ).child( mAuth.getCurrentUser().getUid() ).addValueEventListener( new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -123,7 +116,7 @@ public class Crear_Ruta extends AppCompatActivity {
                             usuario = new ModelUser(usu.getId(), (dataSnapshot.child( "email" ).getValue()).toString() , usu.getNombre() );
                             if (!title.isEmpty() && !description.isEmpty() && !distancia.isEmpty()
                                     && !desnivel.isEmpty() && !time.isEmpty() && !pais.isEmpty() ) {
-                                ModelRuta ruta = new ModelRuta(title , usuario, description, distancia, desnivel, time, pais, city, urlImagen, dateButton);
+                                ModelRuta ruta = new ModelRuta(title , usuario, description, distancia, desnivel, time, pais, city, urlImagen);
                                 publicarRuta( ruta );
 
                                 Toast.makeText( Crear_Ruta.this, "Ruta Publicada Correctamente", Toast.LENGTH_SHORT ).show();
@@ -241,6 +234,7 @@ public class Crear_Ruta extends AppCompatActivity {
     }
 
 
+    /*
     private String getTodaysDate() {
         Calendar cal = Calendar.getInstance();
         int year = cal.get( Calendar.YEAR );
@@ -250,13 +244,13 @@ public class Crear_Ruta extends AppCompatActivity {
 
         return  makeDateString(  day, month, year );
 
-    }
+    }*/
 
 
 
 
 
-
+/*
     private void initDatePicker(){
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -305,7 +299,7 @@ public class Crear_Ruta extends AppCompatActivity {
 
     public void openDataPicker(View view){
         datePickerDialog.show();
-    }
+    } */
 
 
 

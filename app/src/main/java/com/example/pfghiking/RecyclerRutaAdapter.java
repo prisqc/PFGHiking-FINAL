@@ -110,6 +110,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
         private TextView tiempo;
         private ImageView imgRuta;
         public RelativeLayout layoutDelete; //PARA BORRA ITEM RV
+        //private Button dateButton;
 
 
         public RecyclerHolder(final View itemView) {
@@ -121,6 +122,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
             tiempo = itemView.findViewById( R.id.TV_timeRuta_Layout );
             imgRuta = itemView.findViewById( R.id.img_Ruta_Layout );
             layoutDelete = itemView.findViewById( R.id.LayoutBorrar ); //PARA BORRA ITEM RV
+          //  dateButton = itemView.findViewById( R.id.datePickerButtonRV );
 
         }
 
@@ -131,6 +133,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
             desnivel.setText( modelRuta.getDesnivel() );
             tiempo.setText( modelRuta.getTiempo() );
             Glide.with( imgRuta.getContext() ).load( modelRuta.getImagen() ).into( imgRuta );
+          //  dateButton.setText( modelRuta.getDateButton().toString() );
 
             itemView.setOnClickListener( new View.OnClickListener() {
                 @Override

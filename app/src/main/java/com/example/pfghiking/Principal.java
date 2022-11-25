@@ -47,7 +47,7 @@ public class Principal extends AppCompatActivity  implements SearchView.OnQueryT
 
         rvLista.setLayoutManager( new LinearLayoutManager( this ) );
 
-        elements = new ArrayList<ModelRuta>();
+        elements = new ArrayList<>();
 
         mData = FirebaseDatabase.getInstance( "https://pfghiking-default-rtdb.europe-west1.firebasedatabase.app/" );
 
@@ -64,11 +64,11 @@ public class Principal extends AppCompatActivity  implements SearchView.OnQueryT
         mData.getReference().child( "rutas" ).addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                elements.removeAll( elements );
+                Principal.this.elements.removeAll( Principal.this.elements );
                 for (DataSnapshot snapshot :
                         dataSnapshot.getChildren()) {
-                    ModelRuta rut = snapshot.getValue( ModelRuta.class );
-                    elements.add( rut );
+                    ModelRuta rut = snapshot.getValue( ModelRuta.class);
+                    Principal.this.elements.add( rut );
                 }
                 adapter.notifyDataSetChanged( );
             }

@@ -1,7 +1,6 @@
 package com.example.pfghiking;
 
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,7 +33,7 @@ public class Info_Ruta extends AppCompatActivity {
     private TextView city;
     private ImageView imageView = null;
     private String imagen = "";
-    private Button editButton;
+   // private Button dateButton;
     private List<ModelRuta> elements;
 
     @Override
@@ -57,7 +56,7 @@ public class Info_Ruta extends AppCompatActivity {
         country = findViewById( R.id.TV_paisRuta_IR );
         city = findViewById( R.id.TV_cityRuta_IR );
         imageView = findViewById( R.id.imgRuta_IR );
-
+      //  dateButton = findViewById( R.id.datePickerButtonIR );
 
 
         itemDetails = (ModelRuta ) getIntent().getExtras().getSerializable( "itemDetails" );
@@ -69,6 +68,7 @@ public class Info_Ruta extends AppCompatActivity {
         time.setText( itemDetails.getTiempo() );
         country.setText( itemDetails.getPais() );
         city.setText( itemDetails.getCiudad() );
+      //  dateButton.setText( itemDetails.getDateButton().toString() );
 
 
 
@@ -107,6 +107,9 @@ public class Info_Ruta extends AppCompatActivity {
 
                     imagen = getUrl(snapshot.child( "imagen" ).getValue().toString());
                     Glide.with( imageView.getContext() ).load( imagen ).into( imageView );
+
+                  //  String date = snapshot.child( "dateButton" ).getValue().toString();
+                   // dateButton.setText(date);
 
 
 
