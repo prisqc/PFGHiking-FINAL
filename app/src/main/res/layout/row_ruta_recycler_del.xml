@@ -31,13 +31,14 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
             />
+
     </RelativeLayout>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/lightgreen2">
 
         <TextView
             android:id="@+id/TV_name_Layout"
@@ -177,6 +178,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"   />
+
 
     </RelativeLayout>
 

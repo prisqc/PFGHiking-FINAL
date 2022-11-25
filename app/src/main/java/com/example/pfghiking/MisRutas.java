@@ -1,8 +1,12 @@
 package com.example.pfghiking;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -40,7 +44,7 @@ public class MisRutas extends AppCompatActivity implements     //PARA REMOVER IT
         setContentView( R.layout.activity_mis_rutas );
 
         //Para ocultar el actionBar
-        getSupportActionBar().hide();
+       // getSupportActionBar().hide();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -141,6 +145,50 @@ public class MisRutas extends AppCompatActivity implements     //PARA REMOVER IT
         snackbar.show();
 
     }
+
+
+
+
+
+
+    //**********************************************************************************************
+    //PARA CREAR EL MENU EN EL PANTALLA PRINCIPAL
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate( R.menu.menu_mis_rutas, menu );
+        return true;
+    }
+
+
+
+    //**********************************************************************************************
+    //PARA CREAR OPCIONES DEL MENU EN LA PANTALLA PRINCIPAL
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.icon_update:
+                Intent i = new Intent( MisRutas.this, Perfil.class );
+                i.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                startActivity( i );
+                // finish();
+                return true;
+            case R.id.icon_delete:
+                Intent i2 = new Intent( MisRutas.this, MainActivity.class );
+                i2.addFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                startActivity( i2 );
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected( item );
+        }
+    } // fin del menú
+
+
+
+
 
 
 }

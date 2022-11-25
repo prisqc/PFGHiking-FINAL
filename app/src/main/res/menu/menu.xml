@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:title="Perfil"
+        android:icon="@drawable/ic_perfiil"
+        android:iconTint="@color/white"
+        app:showAsAction="always"
         android:id="@+id/opcion1" />
     <item android:title="Logout"
+        android:icon="@drawable/ic_logout"
+        android:iconTint="@color/white"
+          app:showAsAction="always"
         android:id="@+id/opcion2" />
 
 </menu>

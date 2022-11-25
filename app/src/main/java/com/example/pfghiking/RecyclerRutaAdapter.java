@@ -49,7 +49,6 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerRutaAdapter.RecyclerHolder holder, int position) {
-
         holder.binData(dataRutas.get( position ));
 
        /* String imagen = rut.getImagen();
@@ -147,7 +146,7 @@ public class RecyclerRutaAdapter  extends RecyclerView.Adapter<RecyclerRutaAdapt
     //PARA REMOVER ITEM RV
     public void removeItem(int position){
         dataRutas.remove( position );
-        notifyItemRemoved( position );
+        RecyclerRutaAdapter.this.notifyItemRemoved( position );
     }
 
     //PARA RESTAURAR EL ITEM REMOVIDO DEL RV

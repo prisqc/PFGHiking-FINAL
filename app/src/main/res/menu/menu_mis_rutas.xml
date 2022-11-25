@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/icon_update"
+        android:icon="@drawable/ic_create"
+        android:iconTint="@color/white"
+        android:title="Edit done"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/icon_delete"
+        android:icon="@drawable/ic_delete"
+        android:iconTint="@color/white"
+        android:title="Edit done"
+        app:showAsAction= "always"/>
+
+
+</menu>
