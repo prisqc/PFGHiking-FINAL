@@ -47,6 +47,7 @@ public class Ruta_update extends AppCompatActivity {
     private ImageView imageView = null;
     private String imagen = "";
     private List<ModelRuta> elements;
+    private ModelUser usuario ;
 
     private StorageReference mStorage;
     private ProgressDialog progressDialog;
@@ -148,6 +149,13 @@ public class Ruta_update extends AppCompatActivity {
 
 
                 }
+
+                updRuta.setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        rutaActualizada();
+                    }
+                } );
             }
 
             @Override
@@ -190,7 +198,7 @@ public class Ruta_update extends AppCompatActivity {
 
 
 
-    //AGREGAR FOTO DE PERFIL - METODO ONACTIVITYRESULT
+    //AGREGAR FOTO DE PERFIL DE LA RUTA - METODO ONACTIVITYRESULT
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult( requestCode, resultCode, data );
@@ -223,7 +231,7 @@ public class Ruta_update extends AppCompatActivity {
 
                             //recupera la Url y asignala en el campo determinado "imagen"
                             imagen = uri.toString();
-                            rDataBase.child( "Users" ).child( mAuth.getCurrentUser().getUid() ).child( "foto" ).setValue( imagen );
+                            rDataBase.child( "rutas" ).child( "id" ).child( "foto" ).setValue( imagen );
 
                         }
                     } );
@@ -238,6 +246,7 @@ public class Ruta_update extends AppCompatActivity {
 
 
 
+
     // METODO QUE DEVUELVE LA URL DE LA IMAGEN DE LA RUTA QUE SE SELECCIONADO
     private String getUrl(String urlRuta) {
 
@@ -249,7 +258,6 @@ public class Ruta_update extends AppCompatActivity {
 
                 if (!url.equals( "" ) ) {
                     Toast toast = Toast.makeText( getApplicationContext(), "Cargando Foto", Toast.LENGTH_SHORT );
-                    //toast.setGravity( Gravity.TOP, 0, 1 );
                     toast.show();
                     Glide.with( Ruta_update.this ).load( imagen )
                             .into( ( ImageView ) findViewById( R.id.imageView ) );
@@ -259,7 +267,71 @@ public class Ruta_update extends AppCompatActivity {
         return urlRuta;
     }
 
-    
+
+
+
+    //METODO QUE ACTUALIZA LA LISTA
+    private void rutaActualizada(){
+
+        ModelRuta r = new ModelRuta();
+
+        itemDetails.setNombre_ruta( title.getText().toString().trim() );
+        itemDetails.setDescripcion( description.getText().toString().trim() );
+        itemDetails.setDistancia( distance.getText().toString().trim() );
+        itemDetails.setDesnivel( altitude.getText().toString().trim() );
+        itemDetails.setTiempo( time.getText().toString().trim() );
+        itemDetails.setPais( country.getText().toString().trim() );
+        itemDetails.setCiudad( city.getText().toString().trim() );
+
+
+        rDataBase.child( "Users" ).child( mAuth.getCurrentUser().getUid() ).addValueEventListener( new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                rDataBase.child( "Usuario" ).child( mAuth.getCurrentUser().getUid() ).removeEventListener( this );
+                if(dataSnapshot.exists()){
+                    ModelUser usu = dataSnapshot.getValue( ModelUser.class);
+
+                    usuario = new ModelUser(usu.getId(), (dataSnapshot.child( "email" ).getValue()).toString() , usu.getNombre() );
+                    if (!itemDetails.nombre_ruta.isEmpty() && !itemDetails.descripcion.isEmpty() && !itemDetails.distancia.isEmpty()) {
+                        ModelRuta ruta = new ModelRuta();
+                        publicarRuta( ruta );
+
+                        Toast.makeText( Ruta_update.this, "Ruta actualizada Correctamente", Toast.LENGTH_SHORT ).show();
+                        startActivity( new Intent( getApplicationContext(), Principal.class ) );
+                        finish();
+
+                    } else {
+                        Toast.makeText( Ruta_update.this, "campos sin llenar", Toast.LENGTH_SHORT ).show();
+                    }
+
+                } else {
+                    Toast.makeText( Ruta_update.this, "Hay un error, no se pudo actualizarzar", Toast.LENGTH_SHORT ).show();
+                    startActivity( new Intent( getApplicationContext(), Crear_Ruta.class ) );
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        } );
+
+
+    }
+
+
+    // METODO PUBLICAR RUTA
+    public void publicarRuta(ModelRuta ruta) {
+
+        String key = rDataBase.child("rutas").push().getKey();
+        rDataBase.child( "rutas" ).child(key).setValue( ruta );
+
+    }
+
+
+
+
+
 } //FIN DE LA CLASE ACTUALIZAR RUTA
 
 
